@@ -1,261 +1,212 @@
-import React from 'react';
-import { ArrowRight, Droplet, Heart, Users, Award, TrendingUp } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { LanguageSwitcher } from '../components/LanguageSwitcher';
-import { Link } from 'react-router';
+import React from "react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  HeartPulse,
+  Home,
+  MessageCircle,
+  ShieldCheck,
+} from "lucide-react";
+import { Link } from "react-router";
+import { useLanguage } from "../context/LanguageContext";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { ThreeBackground } from "../components/ThreeBackground";
+
+const serviceCards = [
+  {
+    icon: HeartPulse,
+    title: "Wellness monitoring",
+    copy: "Daily check-ins, vital trends, and gentle alerts help families notice changes early.",
+    tone: "text-rose-600 bg-rose-50 border-rose-100",
+  },
+  {
+    icon: MessageCircle,
+    title: "Family updates",
+    copy: "Clear messages, reminders, and shared notes keep everyone involved without noise.",
+    tone: "text-blue-600 bg-blue-50 border-blue-100",
+  },
+  {
+    icon: Home,
+    title: "Care service support",
+    copy: "Organize practical services such as home visits, medication reminders, and care subsidies.",
+    tone: "text-emerald-600 bg-emerald-50 border-emerald-100",
+  },
+];
+
+const trustStats = [
+  ["24/7", "family visibility"],
+  ["3 min", "daily check-in"],
+  ["98%", "care satisfaction"],
+  ["1 place", "for care updates"],
+];
 
 export function Presentation() {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+    <div className="relative min-h-screen overflow-hidden bg-[#f7faf8] text-slate-950">
+      <ThreeBackground />
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <Heart className="size-8 text-red-500" />
-            <span className="text-xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              CareBridge
-            </span>
+            <div className="flex size-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100">
+              <ShieldCheck className="size-6" />
+            </div>
+            <div>
+              <span className="block text-lg font-semibold leading-none text-slate-950">
+                CareBridge
+              </span>
+              <span className="hidden text-xs text-slate-500 sm:block">
+                Elder support services
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
+
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link to="/elder">
-              <Button variant="outline" size="sm">Elder View</Button>
+              <Button variant="outline" size="sm" className="bg-white">
+                Elder View
+              </Button>
             </Link>
-            <Link to="/family">
-              <Button variant="outline" size="sm">Family View</Button>
+            <Link to="/family" className="hidden sm:block">
+              <Button variant="outline" size="sm" className="bg-white">
+                Family View
+              </Button>
             </Link>
             <LanguageSwitcher />
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="flex justify-center gap-2 mb-6">
-            <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100">
-              {t('socialInnovation')}
-            </Badge>
-            <Badge className="bg-purple-100 text-purple-700 hover:bg-purple-100">
-              Innovation Award 2026
-            </Badge>
-          </div>
-          <h1 className="text-6xl font-bold mb-6 bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            {t('elderlyCare')}
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            Transforming blood donation into elderly care subsidies through innovative technology and social impact
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button size="lg" className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-              {t('learnMore')}
-              <ArrowRight className="ml-2 size-5" />
-            </Button>
-            <Button size="lg" variant="outline">
-              Watch Demo
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Business Model Section */}
-      <section className="container mx-auto px-6 py-16">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">{t('businessModel')}</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            A sustainable ecosystem connecting blood donors, families, and elderly care services
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Step 1 */}
-          <Card className="relative overflow-hidden border-2 hover:shadow-2xl transition-shadow group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-red-500 to-pink-500 opacity-10 rounded-bl-full"></div>
-            <CardHeader>
-              <div className="size-16 bg-linear-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Droplet className="size-8 text-white" />
-              </div>
-              <CardTitle className="text-2xl">{t('step1')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img 
-                src="https://images.unsplash.com/photo-1615461066159-fea0960485d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibG9vZCUyMGRvbmF0aW9uJTIwbWVkaWNhbCUyMGhlYWx0aGNhcmV8ZW58MXx8fHwxNzc5MTczNDM5fDA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Blood donation"
-                className="w-full h-40 object-cover rounded-lg mb-4"
-              />
-              <p className="text-gray-600 leading-relaxed">{t('step1Desc')}</p>
-              <div className="mt-4 flex items-center gap-2 text-sm text-red-600 font-medium">
-                <Award className="size-4" />
-                <span>+500 points per donation</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Step 2 */}
-          <Card className="relative overflow-hidden border-2 hover:shadow-2xl transition-shadow group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-blue-500 to-cyan-500 opacity-10 rounded-bl-full"></div>
-            <CardHeader>
-              <div className="size-16 bg-linear-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <TrendingUp className="size-8 text-white" />
-              </div>
-              <CardTitle className="text-2xl">{t('step2')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img 
-                src="https://images.unsplash.com/photo-1601132359864-c974e79890ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbm5vdmF0aW9uJTIwdGVjaG5vbG9neSUyMGZ1dHVyZXxlbnwxfHx8fDE3NzkwOTk4Njh8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Technology"
-                className="w-full h-40 object-cover rounded-lg mb-4"
-              />
-              <p className="text-gray-600 leading-relaxed">{t('step2Desc')}</p>
-              <div className="mt-4 flex items-center gap-2 text-sm text-blue-600 font-medium">
-                <Heart className="size-4" />
-                <span>Flexible conversion rates</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Step 3 */}
-          <Card className="relative overflow-hidden border-2 hover:shadow-2xl transition-shadow group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-purple-500 to-pink-500 opacity-10 rounded-bl-full"></div>
-            <CardHeader>
-              <div className="size-16 bg-linear-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Users className="size-8 text-white" />
-              </div>
-              <CardTitle className="text-2xl">{t('step3')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img 
-                src="https://images.unsplash.com/photo-1604881991720-f91add269bed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXJpbmclMjBoYW5kcyUyMHN1cHBvcnQlMjBoZWxwfGVufDF8fHx8MTc3OTE3OTMyNHww&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Care"
-                className="w-full h-40 object-cover rounded-lg mb-4"
-              />
-              <p className="text-gray-600 leading-relaxed">{t('step3Desc')}</p>
-              <div className="mt-4 flex items-center gap-2 text-sm text-purple-600 font-medium">
-                <Heart className="size-4" />
-                <span>24/7 care support</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Impact Statistics */}
-      <section className="container mx-auto px-6 py-16">
-        <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-white">
-          <h2 className="text-4xl font-bold text-center mb-12">Our Impact</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">5,000+</div>
-              <div className="text-blue-100">Active Users</div>
+      <main className="relative z-10">
+        <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1fr_0.86fr] lg:px-8 lg:py-20">
+          <div className="max-w-3xl">
+            <div className="mb-6 flex flex-wrap gap-2">
+              <Badge className="border border-emerald-100 bg-emerald-50 text-emerald-700 hover:bg-emerald-50">
+                {t("socialInnovation")}
+              </Badge>
+              <Badge className="border border-blue-100 bg-blue-50 text-blue-700 hover:bg-blue-50">
+                Family-first care coordination
+              </Badge>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">12,500</div>
-              <div className="text-blue-100">Blood Donations</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">3,200</div>
-              <div className="text-blue-100">Families Helped</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">98%</div>
-              <div className="text-blue-100">Satisfaction Rate</div>
+
+            <h1 className="text-4xl font-semibold leading-[1.05] tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
+              {t("elderlyCare")}
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+              CareBridge helps elders stay supported at home while giving families
+              a calm, reliable way to coordinate health updates, reminders,
+              messages, and care services.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link to="/elder">
+                <Button
+                  size="lg"
+                  className="h-12 bg-emerald-700 px-6 text-base hover:bg-emerald-800"
+                >
+                  Open elder support
+                  <ArrowRight className="size-5" />
+                </Button>
+              </Link>
+              <Link to="/family">
+                <Button size="lg" variant="outline" className="h-12 bg-white px-6 text-base">
+                  View family dashboard
+                </Button>
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Key Features */}
-      <section className="container mx-auto px-6 py-16">
-        <h2 className="text-4xl font-bold text-center mb-12">Key Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <Heart className="size-6 text-orange-600" />
-                </div>
-                Elder-Friendly Interface
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">Large typography, high contrast design, and simple navigation optimized for seniors with limited vision</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <TrendingUp className="size-6 text-blue-600" />
-                </div>
-                Real-Time Health Monitoring
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">Family dashboard with health data visualization, device management, and instant alerts</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Users className="size-6 text-purple-600" />
-                </div>
-                Memory Sharing Platform
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">Upload and share photos and videos to keep families connected and create lasting memories</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <div className="p-2 bg-red-100 rounded-lg">
-                  <Droplet className="size-6 text-red-600" />
-                </div>
-                Rewards System
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">Transparent point tracking and conversion system that turns generosity into tangible care benefits</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Join Our Mission</h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Together, we can create a sustainable ecosystem of care and compassion
-          </p>
-          <Button size="lg" className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-8">
-            Get Started Today
-            <ArrowRight className="ml-2 size-5" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Heart className="size-6 text-red-500" />
-            <span className="text-xl font-bold">CareBridge</span>
+          <div className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-emerald-900/10">
+            <img
+              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
+              alt="Caregiver helping an elder at home"
+              className="aspect-[4/3] w-full rounded-3xl object-cover"
+            />
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="rounded-2xl bg-emerald-50 p-4">
+                <div className="text-sm text-emerald-700">Today</div>
+                <div className="mt-1 text-2xl font-semibold">Stable</div>
+              </div>
+              <div className="rounded-2xl bg-blue-50 p-4">
+                <div className="text-sm text-blue-700">Next visit</div>
+                <div className="mt-1 text-2xl font-semibold">2:30 PM</div>
+              </div>
+            </div>
           </div>
-          <p className="text-gray-400">
-            Innovation Award 2026 · Social Enterprise · Elderly Care Solution
-          </p>
-        </div>
-      </footer>
+        </section>
+
+        <section className="border-y border-slate-200 bg-white">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-8 sm:px-6 md:grid-cols-4 lg:px-8">
+            {trustStats.map(([value, label]) => (
+              <div key={label} className="text-center">
+                <div className="text-3xl font-semibold text-slate-950">{value}</div>
+                <div className="mt-1 text-sm text-slate-500">{label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mb-8 max-w-3xl">
+            <h2 className="text-3xl font-semibold text-slate-950 sm:text-4xl">
+              {t("businessModel")}
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-600">
+              The product is designed around the routines families actually
+              manage: health awareness, communication, service coordination,
+              and confidence that an elder is not alone.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {serviceCards.map((service) => (
+              <Card key={service.title} className="border-slate-200 bg-white shadow-sm">
+                <CardContent className="p-6">
+                  <div className={`mb-5 flex size-12 items-center justify-center rounded-2xl border ${service.tone}`}>
+                    <service.icon className="size-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-950">{service.title}</h3>
+                  <p className="mt-3 leading-7 text-slate-600">{service.copy}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-slate-950 py-14 text-white">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:px-8">
+            <div>
+              <Badge className="bg-white/10 text-white hover:bg-white/10">
+                Professional care workflow
+              </Badge>
+              <h2 className="mt-5 text-3xl font-semibold sm:text-4xl">
+                Built for elders, families, and care teams.
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-slate-300">
+                The interface keeps elder tasks simple while giving families
+                enough context to act quickly and respectfully.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                "Medication and visit reminders",
+                "Wellness alerts and family notices",
+                "Shared family responsibilities",
+                "Health trends and device summaries",
+              ].map((label) => (
+                <div key={label as string} className="flex items-center gap-3 rounded-2xl bg-white/8 p-4 ring-1 ring-white/10">
+                  <CheckCircle2 className="size-5 text-emerald-300" />
+                  <span className="text-slate-100">{label as string}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
