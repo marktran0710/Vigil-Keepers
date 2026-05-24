@@ -1,127 +1,143 @@
-import { Home, Heart, MessageCircle } from "lucide-react";
+import React from "react";
+import { Home, Heart, MessageCircle, Play } from "lucide-react";
+import { useNavigate } from "react-router";
 import { useLanguage } from "../context/LanguageContext";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
-import { Link } from "react-router";
+import { NavItem } from "../components/NavItem";
+import { ActionCard } from "../components/ActionCard";
+import { ThreeBackground } from "../components/ThreeBackground";
+
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1526795443948-005b48ce4791?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080";
+const IMAGE_FALLBACK =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImage not available%3C/text%3E%3C/svg%3E";
 
 export function ElderHome() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleWatchVideo = () => {
+    console.log("Play video action");
+  };
+
+  const handleHealthDetails = () => {
+    navigate("/health");
+  };
+
+  const handleMessagesDetails = () => {
+    navigate("/messages");
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-green-50">
-      {/* Top Navigation Bar */}
-      <nav className="bg-white shadow-sm border-b-4 border-orange-200 px-8 py-6">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex gap-8">
-            <Link to="/elder">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="flex flex-col items-center gap-3 h-auto py-4 px-8 hover:bg-orange-100"
-              >
-                <Home className="w-12 h-12 text-orange-500" strokeWidth={2.5} />
-                <span className="text-2xl font-medium">{t("home")}</span>
-              </Button>
-            </Link>
-            <Link to="/elder">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="flex flex-col items-center gap-3 h-auto py-4 px-8 hover:bg-green-100"
-              >
-                <Heart className="w-12 h-12 text-green-500" strokeWidth={2.5} />
-                <span className="text-2xl font-medium">{t("health")}</span>
-              </Button>
-            </Link>
-            <Link to="/elder">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="flex flex-col items-center gap-3 h-auto py-4 px-8 hover:bg-blue-100"
-              >
-                <MessageCircle
-                  className="w-12 h-12 text-blue-500"
-                  strokeWidth={2.5}
-                />
-                <span className="text-2xl font-medium">{t("message")}</span>
-              </Button>
-            </Link>
+    <div className="relative min-h-screen bg-linear-to-b from-orange-50 to-green-50">
+      <ThreeBackground />
+
+      <nav className="relative z-10 border-b-4 border-orange-200 bg-white px-4 py-4 shadow-sm sm:px-6 md:px-8 md:py-6">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div
+            className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:flex lg:gap-8"
+            role="navigation"
+            aria-label="Main navigation"
+          >
+            <NavItem
+              icon={Home}
+              label={t("home")}
+              to="/elder"
+              iconColor="text-orange-500"
+              hoverColor="hover:bg-orange-100"
+            />
+            <NavItem
+              icon={Heart}
+              label={t("health")}
+              to="/health"
+              iconColor="text-green-500"
+              hoverColor="hover:bg-green-100"
+            />
+            <NavItem
+              icon={MessageCircle}
+              label={t("message")}
+              to="/messages"
+              iconColor="text-blue-500"
+              hoverColor="hover:bg-blue-100"
+            />
           </div>
-          <div className="scale-125">
+          <div className="flex justify-center lg:scale-125 lg:justify-end">
             <LanguageSwitcher />
           </div>
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-8 py-12">
-        {/* Welcome Section */}
-        <div className="mb-12">
-          <h1 className="text-6xl font-medium text-gray-800 mb-6">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-12">
+        <div className="mb-8 text-center sm:mb-10 md:mb-12 md:text-left">
+          <h1 className="mb-3 text-4xl font-medium leading-tight text-gray-800 sm:mb-5 sm:text-5xl md:mb-6 md:text-6xl">
             {t("welcomeBack")}
           </h1>
-          <p className="text-3xl text-gray-600">{t("todayFeeling")}</p>
+          <p className="text-xl text-gray-600 sm:text-2xl md:text-3xl">
+            {t("todayFeeling")}
+          </p>
         </div>
 
-        {/* Video Section */}
-        <Card className="mb-12 overflow-hidden border-4 border-orange-200 shadow-xl">
+        <Card className="mb-8 overflow-hidden border-2 border-orange-200 shadow-xl sm:mb-10 sm:border-4 md:mb-12">
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1526795443948-005b48ce4791?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
+              src={HERO_IMAGE}
               alt="Elder care video"
-              className="w-full h-96 object-cover"
+              className="h-56 w-full object-cover sm:h-72 md:h-96"
+              onError={(e) => {
+                e.currentTarget.src = IMAGE_FALLBACK;
+              }}
             />
-            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
               <Button
                 size="lg"
-                className="h-24 px-12 text-3xl bg-orange-500 hover:bg-orange-600 shadow-2xl"
+                className="h-14 px-6 text-lg bg-orange-500 hover:bg-orange-600 shadow-2xl sm:h-16 sm:px-8 sm:text-xl md:h-24 md:px-12 md:text-3xl"
+                onClick={handleWatchVideo}
+                aria-label="Play video about elder care"
               >
-                ▶ {t("watchVideo")}
+                <Play className="size-5 fill-current sm:size-6 md:size-8" />
+                {t("watchVideo")}
               </Button>
             </div>
           </div>
-          <div className="p-8 bg-gradient-to-r from-orange-100 to-green-100">
-            <p className="text-2xl text-gray-700">{t("todayFeeling")}</p>
+          <div className="bg-linear-to-r from-orange-100 to-green-100 p-5 sm:p-6 md:p-8">
+            <p className="text-lg text-gray-700 sm:text-xl md:text-2xl">
+              {t("todayFeeling")}
+            </p>
           </div>
         </Card>
 
-        {/* Action Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="p-12 border-4 border-green-200 shadow-lg hover:shadow-2xl transition-shadow cursor-pointer bg-gradient-to-br from-green-50 to-white">
-            <div className="flex items-center gap-6 mb-6">
-              <Heart className="w-16 h-16 text-green-500" strokeWidth={2.5} />
-              <h2 className="text-4xl font-medium text-gray-800">
-                {t("health")}
-              </h2>
-            </div>
-            <p className="text-2xl text-gray-600 mb-8">{t("checkHealth")}</p>
-            <Button
-              size="lg"
-              className="w-full h-16 text-2xl bg-green-500 hover:bg-green-600"
-            >
-              {t("viewDetails")}
-            </Button>
-          </Card>
+        <div
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8"
+          role="region"
+          aria-label="Action cards"
+        >
+          <ActionCard
+            icon={Heart}
+            title={t("health")}
+            description={t("checkHealth")}
+            buttonLabel={t("viewDetails")}
+            borderColor="border-green-200"
+            buttonColor="bg-green-500"
+            hoverButtonColor="hover:bg-green-600"
+            gradientFrom="bg-linear-to-br from-green-50"
+            iconColor="text-green-500"
+            onAction={handleHealthDetails}
+          />
 
-          <Card className="p-12 border-4 border-blue-200 shadow-lg hover:shadow-2xl transition-shadow cursor-pointer bg-gradient-to-br from-blue-50 to-white">
-            <div className="flex items-center gap-6 mb-6">
-              <MessageCircle
-                className="w-16 h-16 text-blue-500"
-                strokeWidth={2.5}
-              />
-              <h2 className="text-4xl font-medium text-gray-800">
-                {t("message")}
-              </h2>
-            </div>
-            <p className="text-2xl text-gray-600 mb-8">{t("newMessages")}</p>
-            <Button
-              size="lg"
-              className="w-full h-16 text-2xl bg-blue-500 hover:bg-blue-600"
-            >
-              {t("viewDetails")}
-            </Button>
-          </Card>
+          <ActionCard
+            icon={MessageCircle}
+            title={t("message")}
+            description={t("newMessages")}
+            buttonLabel={t("viewDetails")}
+            borderColor="border-blue-200"
+            buttonColor="bg-blue-500"
+            hoverButtonColor="hover:bg-blue-600"
+            gradientFrom="bg-linear-to-br from-blue-50"
+            iconColor="text-blue-500"
+            onAction={handleMessagesDetails}
+          />
         </div>
       </main>
     </div>

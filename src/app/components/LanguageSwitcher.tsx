@@ -1,23 +1,44 @@
-import { useLanguage } from "../context/LanguageContext";
+import React from 'react';
+import { Globe } from 'lucide-react';
+import { useLanguage, Language } from '../context/LanguageContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
+import { Button } from './ui/button';
+
+const languageOptions: { code: Language; label: string }[] = [
+  { code: 'zh-TW', label: '繁體中文' },
+  { code: 'en', label: 'English' },
+  { code: 'vi', label: 'Tiếng Việt' },
+];
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
+  const currentLanguageLabel = languageOptions.find((opt) => opt.code === language)?.label || '繁體中文';
+
   return (
-    <div className="flex gap-2">
-      {(["zh-TW", "en", "vi"] as const).map((lang) => (
-        <button
-          key={lang}
-          onClick={() => setLanguage(lang)}
-          className={`px-4 py-2 rounded font-medium transition ${
-            language === lang
-              ? "bg-orange-500 text-white"
-              : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-          }`}
-        >
-          {lang === "zh-TW" ? "中文" : lang === "en" ? "English" : "Tiếng Việt"}
-        </button>
-      ))}
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" className="gap-2">
+          <Globe className="size-4" />
+          <span>{currentLanguageLabel}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {languageOptions.map((option) => (
+          <DropdownMenuItem
+            key={option.code}
+            onClick={() => setLanguage(option.code)}
+            className={language === option.code ? 'bg-accent font-medium' : ''}
+          >
+            {option.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
