@@ -3,6 +3,7 @@ import {
   CalendarCheck,
   Heart,
   Home,
+  LogOut,
   MessageCircle,
   Phone,
   Pill,
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useLanguage } from "../context/LanguageContext";
+import { useAuth } from "../context/AuthContext";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -50,7 +52,13 @@ const todayCards = [
 
 export function ElderHome() {
   const { t } = useLanguage();
+  const { logout } = useAuth();
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login/elder", { replace: true });
+  };
 
   return (
     <div className="relative min-h-screen bg-[#f7faf4] text-slate-950">
@@ -87,6 +95,15 @@ export function ElderHome() {
           </div>
           <div className="flex justify-center lg:scale-110 lg:justify-end">
             <LanguageSwitcher />
+            <Button
+              variant="outline"
+              size="sm"
+              className="ml-2 bg-white"
+              onClick={handleLogout}
+            >
+              <LogOut className="size-4" />
+              Logout
+            </Button>
           </div>
         </div>
       </nav>

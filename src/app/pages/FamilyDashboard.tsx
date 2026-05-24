@@ -1,348 +1,210 @@
-import React, { useState } from 'react';
-import { Activity, Droplet, Heart, Image, Video, Upload, FileText, Smartphone } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { LanguageSwitcher } from '../components/LanguageSwitcher';
-import { Progress } from '../components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Link } from 'react-router';
+import React from "react";
+import {
+  Activity,
+  Bell,
+  CalendarCheck,
+  Heart,
+  Home,
+  LogOut,
+  MessageCircle,
+  Phone,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
+import { Link, useNavigate } from "react-router";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { useAuth } from "../context/AuthContext";
 
-// Mock data for health charts
-const healthData = [
-  { day: 'Mon', heartRate: 72, bloodPressure: 120, steps: 5200 },
-  { day: 'Tue', heartRate: 75, bloodPressure: 118, steps: 6800 },
-  { day: 'Wed', heartRate: 70, bloodPressure: 122, steps: 4500 },
-  { day: 'Thu', heartRate: 73, bloodPressure: 119, steps: 7200 },
-  { day: 'Fri', heartRate: 71, bloodPressure: 121, steps: 5900 },
-  { day: 'Sat', heartRate: 74, bloodPressure: 117, steps: 8100 },
-  { day: 'Sun', heartRate: 72, bloodPressure: 120, steps: 6300 },
+const overviewCards = [
+  {
+    icon: ShieldCheck,
+    label: "Care status",
+    value: "Stable",
+    detail: "Last wellness check at 8:45 AM",
+    tone: "bg-emerald-50 text-emerald-700 border-emerald-100",
+  },
+  {
+    icon: Heart,
+    label: "Heart rate",
+    value: "72 bpm",
+    detail: "Within usual range",
+    tone: "bg-rose-50 text-rose-700 border-rose-100",
+  },
+  {
+    icon: CalendarCheck,
+    label: "Next visit",
+    value: "Tomorrow",
+    detail: "Care assistant at 10:00 AM",
+    tone: "bg-blue-50 text-blue-700 border-blue-100",
+  },
 ];
 
-const mediaItems = [
-  {
-    id: 1,
-    type: 'photo',
-    url: 'https://images.unsplash.com/photo-1528569937393-ee892b976859?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjBlbGRlcmx5JTIwcGhvdG8lMjBtZW1vcmllc3xlbnwxfHx8fDE3NzkxNzkyNjh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Family Gathering',
-    date: '2026-05-15',
-  },
-  {
-    id: 2,
-    type: 'photo',
-    url: 'https://images.unsplash.com/photo-1586498024141-1940debde48d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGRlcmx5JTIwZ3JhbmRwYXJlbnQlMjBncmFuZGNoaWxkJTIwaGFwcHl8ZW58MXx8fHwxNzc5MTc5MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Grandparent Time',
-    date: '2026-05-12',
-  },
-  {
-    id: 3,
-    type: 'photo',
-    url: 'https://images.unsplash.com/photo-1658314755561-389d5660ee54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZW5pb3IlMjB3ZWxsbmVzcyUyMGFjdGl2aXR5JTIwZXhlcmNpc2V8ZW58MXx8fHwxNzc5MTc5MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Morning Exercise',
-    date: '2026-05-10',
-  },
+const updates = [
+  ["8:45 AM", "Wellness check completed", "Mood and appetite reported normal."],
+  ["12:30 PM", "Medication reminder", "Lunch medication reminder is scheduled."],
+  ["2:30 PM", "Family note", "Daughter confirmed weekend visit."],
+];
+
+const responsibilities = [
+  ["Medication refill", "Due Friday", "Assigned to Mei"],
+  ["Doctor appointment", "May 28, 10:30 AM", "Assigned to David"],
+  ["Grocery support", "Weekly", "Assigned to Anna"],
 ];
 
 export function FamilyDashboard() {
-  const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('health');
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login/family", { replace: true });
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b shadow-sm">
-        <div className="px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Heart className="size-8 text-blue-600" />
-            <h1 className="text-2xl font-semibold text-gray-800">{t('dashboard')}</h1>
+    <div className="min-h-screen bg-[#f7faf8] text-slate-950">
+      <header className="border-b border-slate-200 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="flex items-center gap-3">
+            <div className="flex size-11 items-center justify-center rounded-xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+              <Users className="size-6" />
+            </div>
+            <div>
+              <h1 className="text-xl font-semibold leading-tight">
+                Family dashboard
+              </h1>
+              <p className="text-sm text-slate-500">
+                Shared care visibility for family members
+              </p>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Link to="/elder">
-              <Button variant="outline" size="sm">
-                {t('home')}
-              </Button>
-            </Link>
-            <Link to="/presentation">
-              <Button variant="outline" size="sm">
-                Presentation
+
+          <div className="flex flex-wrap items-center gap-2">
+            <Link to="/">
+              <Button variant="outline" size="sm" className="bg-white">
+                <Home className="size-4" />
+                Home
               </Button>
             </Link>
             <LanguageSwitcher />
+            <Button variant="outline" size="sm" className="bg-white" onClick={handleLogout}>
+              <LogOut className="size-4" />
+              Logout
+            </Button>
           </div>
         </div>
       </header>
 
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 bg-white border-r min-h-[calc(100vh-73px)] p-6">
-          <nav className="space-y-2">
-            <button
-              onClick={() => setActiveTab('health')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                activeTab === 'health' ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              <FileText className="size-5" />
-              {t('healthReports')}
-            </button>
-            <button
-              onClick={() => setActiveTab('devices')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                activeTab === 'devices' ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              <Smartphone className="size-5" />
-              {t('deviceManagement')}
-            </button>
-            <button
-              onClick={() => setActiveTab('media')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                activeTab === 'media' ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              <Image className="size-5" />
-              {t('mediaUpload')}
-            </button>
-          </nav>
-        </aside>
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <section className="mb-6 grid gap-5 lg:grid-cols-[1fr_0.72fr]">
+          <div className="rounded-3xl border border-blue-100 bg-white p-6 shadow-xl shadow-blue-900/5 sm:p-8">
+            <Badge className="bg-blue-50 text-blue-700 hover:bg-blue-50">
+              Family mode
+            </Badge>
+            <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
+              Keep everyone aligned around daily care.
+            </h2>
+            <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
+              Family members can review health updates, coordinate tasks,
+              message the elder, and see what the care team has already handled.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button className="h-12 bg-blue-700 px-5 text-base hover:bg-blue-800">
+                <MessageCircle className="size-5" />
+                Message elder
+              </Button>
+              <Button variant="outline" className="h-12 bg-white px-5 text-base">
+                <Phone className="size-5" />
+                Call care team
+              </Button>
+            </div>
+          </div>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
-          {activeTab === 'health' && (
-            <div className="space-y-6">
-              {/* Points Balance */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Droplet className="size-5 text-red-500" />
-                    {t('pointBalance')}
-                  </CardTitle>
-                  <CardDescription>Blood donation reward points</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <span className="text-4xl font-bold text-blue-600">2,450</span>
-                    <span className="text-gray-500">points</span>
-                  </div>
-                  <Progress value={65} className="h-3" />
-                  <p className="text-sm text-gray-600 mt-2">65% of monthly goal (3,750 points)</p>
-                </CardContent>
-              </Card>
+          <Card className="border-slate-200 bg-white shadow-xl shadow-slate-900/5">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Bell className="size-5 text-amber-600" />
+                Priority notice
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-semibold text-slate-950">
+                Medication refill needed
+              </p>
+              <p className="mt-3 leading-7 text-slate-600">
+                The current prescription supply is estimated to run low this
+                Friday. Assign one family member to confirm refill pickup.
+              </p>
+              <Button variant="outline" className="mt-5 bg-white">
+                Assign task
+              </Button>
+            </CardContent>
+          </Card>
+        </section>
 
-              {/* Health Status Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-medium flex items-center gap-2">
-                      <Heart className="size-4 text-red-500" />
-                      {t('heartRate')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-3xl font-bold">72 <span className="text-base font-normal text-gray-500">bpm</span></div>
-                    <p className="text-sm text-green-600 mt-1">Normal range</p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-medium flex items-center gap-2">
-                      <Activity className="size-4 text-blue-500" />
-                      {t('bloodPressure')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-3xl font-bold">120<span className="text-base font-normal text-gray-500">/80</span></div>
-                    <p className="text-sm text-green-600 mt-1">Optimal</p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-medium flex items-center gap-2">
-                      <Activity className="size-4 text-orange-500" />
-                      {t('steps')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-3xl font-bold">6,300</div>
-                    <p className="text-sm text-gray-500 mt-1">Daily average</p>
-                  </CardContent>
-                </Card>
+        <section className="mb-6 grid gap-4 md:grid-cols-3">
+          {overviewCards.map((item) => (
+            <Card key={item.label} className={`border p-5 shadow-sm ${item.tone}`}>
+              <div className="flex items-start gap-4">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-white/80">
+                  <item.icon className="size-6" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium opacity-80">{item.label}</p>
+                  <p className="mt-1 text-2xl font-semibold leading-tight">{item.value}</p>
+                  <p className="mt-2 text-sm opacity-80">{item.detail}</p>
+                </div>
               </div>
+            </Card>
+          ))}
+        </section>
 
-              {/* Charts */}
-              <Tabs defaultValue="heartRate" className="w-full">
-                <TabsList>
-                  <TabsTrigger value="heartRate">{t('heartRate')}</TabsTrigger>
-                  <TabsTrigger value="bloodPressure">{t('bloodPressure')}</TabsTrigger>
-                  <TabsTrigger value="steps">{t('steps')}</TabsTrigger>
-                </TabsList>
-                <TabsContent value="heartRate">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>{t('dailyHealthStatus')} - {t('heartRate')}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={healthData}>
-                          <CartesianGrid strokeDasharray="3 3" key="grid-hr" />
-                          <XAxis dataKey="day" key="xaxis-hr" />
-                          <YAxis domain={[60, 80]} key="yaxis-hr" />
-                          <Tooltip key="tooltip-hr" />
-                          <Line type="monotone" dataKey="heartRate" stroke="#ef4444" strokeWidth={2} key="line-hr" />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                <TabsContent value="bloodPressure">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>{t('dailyHealthStatus')} - {t('bloodPressure')}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={healthData}>
-                          <CartesianGrid strokeDasharray="3 3" key="grid-bp" />
-                          <XAxis dataKey="day" key="xaxis-bp" />
-                          <YAxis domain={[110, 130]} key="yaxis-bp" />
-                          <Tooltip key="tooltip-bp" />
-                          <Line type="monotone" dataKey="bloodPressure" stroke="#3b82f6" strokeWidth={2} key="line-bp" />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                <TabsContent value="steps">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>{t('dailyHealthStatus')} - {t('steps')}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={healthData}>
-                          <CartesianGrid strokeDasharray="3 3" key="grid-steps" />
-                          <XAxis dataKey="day" key="xaxis-steps" />
-                          <YAxis key="yaxis-steps" />
-                          <Tooltip key="tooltip-steps" />
-                          <Bar dataKey="steps" fill="#f97316" key="bar-steps" />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
-            </div>
-          )}
+        <section className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <Card className="border-slate-200 bg-white shadow-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Activity className="size-5 text-emerald-600" />
+                Today&apos;s care timeline
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {updates.map(([time, title, detail]) => (
+                <div key={`${time}-${title}`} className="rounded-2xl border border-slate-200 p-4">
+                  <p className="text-sm font-medium text-blue-700">{time}</p>
+                  <p className="mt-1 font-semibold text-slate-950">{title}</p>
+                  <p className="mt-1 text-sm text-slate-500">{detail}</p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
 
-          {activeTab === 'devices' && (
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>{t('deviceManagement')}</CardTitle>
-                  <CardDescription>Manage connected health devices</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 border rounded-lg">
-                      <div className="flex items-center gap-4">
-                        <div className="p-3 bg-blue-100 rounded-lg">
-                          <Heart className="size-6 text-blue-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium">Smart Watch</h3>
-                          <p className="text-sm text-gray-500">Last synced: 2 hours ago</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="size-2 bg-green-500 rounded-full"></span>
-                        <span className="text-sm text-green-600">Connected</span>
-                      </div>
+          <Card className="border-slate-200 bg-white shadow-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CalendarCheck className="size-5 text-blue-600" />
+                Shared responsibilities
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {responsibilities.map(([task, due, owner]) => (
+                <div key={task} className="rounded-2xl bg-slate-50 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="font-semibold text-slate-950">{task}</p>
+                      <p className="text-sm text-slate-500">{due}</p>
                     </div>
-                    <div className="flex items-center justify-between p-4 border rounded-lg">
-                      <div className="flex items-center gap-4">
-                        <div className="p-3 bg-red-100 rounded-lg">
-                          <Activity className="size-6 text-red-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium">Blood Pressure Monitor</h3>
-                          <p className="text-sm text-gray-500">Last synced: 5 hours ago</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="size-2 bg-green-500 rounded-full"></span>
-                        <span className="text-sm text-green-600">Connected</span>
-                      </div>
-                    </div>
+                    <Badge className="bg-white text-slate-600 hover:bg-white">
+                      {owner}
+                    </Badge>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
-
-          {activeTab === 'media' && (
-            <div className="space-y-6">
-              {/* Upload Section */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Image className="size-5" />
-                      {t('uploadPhoto')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors cursor-pointer">
-                      <Upload className="size-12 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-600 mb-2">Click to upload photos</p>
-                      <p className="text-sm text-gray-400">PNG, JPG up to 10MB</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Video className="size-5" />
-                      {t('uploadVideo')}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors cursor-pointer">
-                      <Upload className="size-12 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-600 mb-2">Click to upload videos</p>
-                      <p className="text-sm text-gray-400">MP4, MOV up to 100MB</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Media Gallery */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>{t('recentMedia')}</CardTitle>
-                  <CardDescription>Shared memories and moments</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {mediaItems.map((item) => (
-                      <div key={item.id} className="group relative overflow-hidden rounded-lg border hover:shadow-lg transition-shadow cursor-pointer">
-                        <img src={item.url} alt={item.title} className="w-full h-48 object-cover" />
-                        <div className="p-3 bg-white">
-                          <h3 className="font-medium text-sm">{item.title}</h3>
-                          <p className="text-xs text-gray-500">{item.date}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
-        </main>
-      </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
+      </main>
     </div>
   );
 }
