@@ -10,248 +10,262 @@ import {
   Cpu,
   Database,
   FileCheck2,
+  Gift,
   HeartPulse,
-  HandHeart,
-  Landmark,
   Mail,
   MapPin,
   Megaphone,
   Phone,
+  PlaySquare,
   Scale,
   ShieldCheck,
-  Smartphone,
+  ShoppingBag,
   Watch,
   Wifi,
 } from "lucide-react";
 import { Link } from "react-router";
+import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
+import { BrandLogo } from "../components/BrandLogo";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { ThreeBackground } from "../components/ThreeBackground";
-import { BrandLogo } from "../components/BrandLogo";
 import { Language, useLanguage } from "../context/LanguageContext";
 
 type LocalizedText = {
   en: string;
   "zh-TW": string;
-  vi?: string;
 };
 
-const text = (value: LocalizedText, language: Language) =>
-  value[language] || value.en;
+const text = (value: LocalizedText, language: Language) => value[language] || value.en;
 
 const serviceCards = [
   {
-    icon: ShieldCheck,
+    icon: HeartPulse,
     title: {
-      en: "Final dignity planning",
-      "zh-TW": "善終尊嚴規劃",
+      en: "Safer aging at home",
+      "zh-TW": "降低高齡居家風險",
     },
     copy: {
-      en: "Register religious preferences, funeral wishes, burial choices, and support needs before a crisis happens.",
-      "zh-TW": "在危機發生前，預先登記宗教信仰、告別方式、葬法選擇與支援需求。",
+      en: "Monitor health, movement, and unusual events so families can respond earlier.",
+      "zh-TW": "透過健康、行動與異常事件監測，讓家屬能更早掌握狀況並回應。",
     },
     tone: "text-rose-600 bg-rose-50 border-rose-100",
   },
   {
-    icon: Database,
-    title: {
-      en: "Case tracking and reporting",
-      "zh-TW": "案件追蹤與通報",
-    },
-    copy: {
-      en: "Connect registrations, case progress, government notifications, and care records in one traceable workflow.",
-      "zh-TW": "整合登記、案件進度、政府通報與照護紀錄，形成可追蹤的處理流程。",
-    },
-    tone: "text-blue-600 bg-blue-50 border-blue-100",
-  },
-  {
     icon: Coins,
     title: {
-      en: "Social contribution points",
-      "zh-TW": "社會貢獻點數",
+      en: "Blood donation points",
+      "zh-TW": "捐血點數回饋",
     },
     copy: {
-      en: "Reward blood donation, organ donation intent, and volunteering with points for healthcare or funeral support.",
-      "zh-TW": "透過捐血、器官捐贈意願與志工服務累積點數，用於醫療或身後事支援。",
+      en: "Convert verified blood donation records into points for device discounts.",
+      "zh-TW": "將經查詢驗證的捐血次數轉換為點數，用於我方醫療照護設備折扣。",
     },
     tone: "text-emerald-600 bg-emerald-50 border-emerald-100",
+  },
+  {
+    icon: PlaySquare,
+    title: {
+      en: "Entertainment and digital legacy",
+      "zh-TW": "娛樂陪伴與數位遺產",
+    },
+    copy: {
+      en: "Play family media for elders and preserve memories as a future digital legacy.",
+      "zh-TW": "家屬可上傳影音素材自動播放給長輩，也為未來保留珍貴回憶。",
+    },
+    tone: "text-blue-600 bg-blue-50 border-blue-100",
   },
 ];
 
 const trustStats = [
-  [{ en: "1 plan", "zh-TW": "一份規劃" }, { en: "for final wishes", "zh-TW": "承載人生最後意願" }],
-  [{ en: "4 sectors", "zh-TW": "四方協作" }, { en: "government, medical, legal, funeral", "zh-TW": "政府、醫療、法律、禮儀" }],
-  [{ en: "100%", "zh-TW": "全流程" }, { en: "traceable case progress", "zh-TW": "案件進度可追蹤" }],
-  [{ en: "1 place", "zh-TW": "一個平台" }, { en: "for memorial and records", "zh-TW": "保存紀錄與數位紀念" }],
+  [{ en: "1 device", "zh-TW": "一台設備" }, { en: "monitoring, media, and recording", "zh-TW": "整合監測、播放與紀錄" }],
+  [{ en: "Blood points", "zh-TW": "捐血點數" }, { en: "for care-device discounts", "zh-TW": "折抵照護設備費用" }],
+  [{ en: "Private by design", "zh-TW": "隱私隔離" }, { en: "family consent required", "zh-TW": "未經同意不得查看內容" }],
+  [{ en: "Online + offline", "zh-TW": "線上線下" }, { en: "e-commerce, care sites, installation", "zh-TW": "電商、機構與實體安裝" }],
+];
+
+const partnerCards = [
+  {
+    icon: Scale,
+    title: {
+      en: "Legal and notarization advisors",
+      "zh-TW": "法律與公證顧問",
+    },
+    detail: {
+      en: "Support compliance, consent records, contract review, and privacy boundaries.",
+      "zh-TW": "協助法遵、同意紀錄、合約審查與隱私權限邊界。",
+    },
+  },
+  {
+    icon: HeartPulse,
+    title: {
+      en: "Blood centers and Taiwan Blood Services Foundation",
+      "zh-TW": "捐血中心與台灣血液基金會",
+    },
+    detail: {
+      en: "Help users verify donation counts and apply for points through our platform.",
+      "zh-TW": "協助民眾查詢捐血次數，並結合平台申請轉換點數。",
+    },
+  },
+  {
+    icon: Cpu,
+    title: {
+      en: "NCU mechanical, electrical, and computer science teams",
+      "zh-TW": "中大機械、電機、資工團隊",
+    },
+    detail: {
+      en: "Develop the integrated device, platform software, and industry-academic collaboration.",
+      "zh-TW": "委託相關科系研發設備與平台，促進產學合作。",
+    },
+  },
+  {
+    icon: Cloud,
+    title: {
+      en: "Google and Amazon cloud support",
+      "zh-TW": "Google / Amazon 雲端支援",
+    },
+    detail: {
+      en: "Provide storage, compute, backup, and scalable infrastructure where needed.",
+      "zh-TW": "作為雲端儲存、算力、備援與擴充基礎設施支援。",
+    },
+  },
+  {
+    icon: ShoppingBag,
+    title: {
+      en: "E-commerce channels",
+      "zh-TW": "電商通路",
+    },
+    detail: {
+      en: "Sell or rent services through platforms such as Shopee, MOMO, and PChome.",
+      "zh-TW": "透過蝦皮、MOMO、PChome 等平台銷售或租賃服務。",
+    },
+  },
 ];
 
 const visualStories = [
   {
-    icon: Building2,
-    eyebrow: { en: "Service network", "zh-TW": "服務網絡" },
+    icon: Gift,
+    eyebrow: { en: "Donation incentive", "zh-TW": "捐血誘因" },
     title: {
-      en: "One coordinated path across public and care partners",
-      "zh-TW": "串連公部門與照護夥伴的一條協作路徑",
+      en: "Give donors practical care value in return",
+      "zh-TW": "讓捐血回饋成為可使用的照護價值",
     },
-    image:
-      "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    image: "/blood-donation-care.png",
     caption: {
-      en: "Government, hospital, legal, funeral, and community partners work from the same case record.",
-      "zh-TW": "政府、醫院、法律、禮儀與社區夥伴共用同一份案件紀錄。",
+      en: "Verified blood donation records can become points for elder-care device discounts.",
+      "zh-TW": "經驗證的捐血紀錄可轉換為點數，用於高齡照護設備折扣。",
     },
     chips: [
-      { en: "Government", "zh-TW": "政府" },
-      { en: "Hospital", "zh-TW": "醫院" },
-      { en: "Legal", "zh-TW": "法律" },
-      { en: "Funeral", "zh-TW": "禮儀" },
-      { en: "Community", "zh-TW": "社區" },
+      { en: "Donate", "zh-TW": "捐血" },
+      { en: "Verify", "zh-TW": "查詢" },
+      { en: "Apply", "zh-TW": "申請" },
+      { en: "Discount", "zh-TW": "折扣" },
     ],
   },
   {
-    icon: FileCheck2,
-    eyebrow: { en: "Digital tools", "zh-TW": "數位工具" },
+    icon: ShieldCheck,
+    eyebrow: { en: "Home safety", "zh-TW": "居家安全" },
     title: {
-      en: "Final wishes become a clear, traceable care record",
-      "zh-TW": "將最後意願轉化為清楚可追蹤的照護紀錄",
+      en: "Reduce home risk for elders living independently",
+      "zh-TW": "降低高齡者在家生活的安全風險",
     },
-    image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    image: "/elder-home-safety.svg",
     caption: {
-      en: "Registration, LINE reminders, case progress, and digital memorials stay connected.",
-      "zh-TW": "登記資料、LINE 提醒、案件進度與數位墓碑彼此串接。",
+      en: "The device records health, activity, audio, video, and emergency signals for family awareness.",
+      "zh-TW": "設備整合健康、行動、錄音、錄影與緊急訊號，協助家屬掌握安全狀態。",
     },
     chips: [
-      { en: "Register", "zh-TW": "登記" },
-      { en: "Notify", "zh-TW": "通知" },
-      { en: "Track", "zh-TW": "追蹤" },
+      { en: "Health", "zh-TW": "健康" },
+      { en: "Movement", "zh-TW": "行動" },
+      { en: "Camera", "zh-TW": "影像" },
+      { en: "SOS", "zh-TW": "求救" },
+    ],
+  },
+  {
+    icon: PlaySquare,
+    eyebrow: { en: "Elder entertainment", "zh-TW": "長者娛樂" },
+    title: {
+      en: "Family media plays automatically for companionship",
+      "zh-TW": "家屬上傳素材，自動播放陪伴長輩",
+    },
+    image: "/elder-entertainment.jpg",
+    caption: {
+      en: "Videos and memories can be played through an easy-to-use device to reduce loneliness.",
+      "zh-TW": "透過易操作設備播放影片與回憶素材，降低長輩被遺忘的感受。",
+    },
+    chips: [
+      { en: "Video", "zh-TW": "影片" },
+      { en: "Audio", "zh-TW": "聲音" },
+      { en: "Family", "zh-TW": "家人" },
+      { en: "Playback", "zh-TW": "播放" },
+    ],
+  },
+  {
+    icon: Database,
+    eyebrow: { en: "Digital legacy", "zh-TW": "數位遺產" },
+    title: {
+      en: "Preserve elder memories for future family members",
+      "zh-TW": "為家屬保存長輩的回憶與故事",
+    },
+    image: "/digital-legacy.jpg",
+    caption: {
+      en: "Media classification, editing, and memory archives can become a paid customization service.",
+      "zh-TW": "影片分類、後製與回憶整理可成為客製化數位遺產服務。",
+    },
+    chips: [
+      { en: "Archive", "zh-TW": "保存" },
+      { en: "Edit", "zh-TW": "後製" },
+      { en: "Classify", "zh-TW": "分類" },
       { en: "Remember", "zh-TW": "紀念" },
     ],
   },
   {
-    icon: HandHeart,
-    eyebrow: { en: "Human value", "zh-TW": "人的價值" },
-    title: {
-      en: "Less fear, more dignity, and fewer people left unseen",
-      "zh-TW": "減少孤獨死恐懼，讓每個人被看見並保有尊嚴",
-    },
-    image:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: {
-      en: "The service supports people without reliable family care and families under financial pressure.",
-      "zh-TW": "服務支持缺乏家屬照顧者，也協助經濟壓力較大的家庭。",
-    },
-    chips: [
-      { en: "Dignity", "zh-TW": "尊嚴" },
-      { en: "Belonging", "zh-TW": "陪伴" },
-      { en: "Support", "zh-TW": "支援" },
-      { en: "Relief", "zh-TW": "安心" },
-    ],
-  },
-  {
-    icon: HeartPulse,
-    eyebrow: { en: "Contribution points", "zh-TW": "貢獻點數" },
-    title: {
-      en: "Donation and volunteering become practical future support",
-      "zh-TW": "讓捐血與志願服務成為未來實際支援",
-    },
-    image:
-      "https://images.unsplash.com/photo-1615461066841-6116e61058f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: {
-      en: "Blood donation, organ donation intent, and volunteering can translate into care or funeral support.",
-      "zh-TW": "捐血、器官捐贈意願與志工服務，可轉化為照護或身後事支援。",
-    },
-    chips: [
-      { en: "Donate", "zh-TW": "捐血" },
-      { en: "Volunteer", "zh-TW": "志工" },
-      { en: "Earn", "zh-TW": "累積" },
-      { en: "Use", "zh-TW": "使用" },
-    ],
-  },
-  {
     icon: Scale,
-    eyebrow: { en: "Trust layer", "zh-TW": "信任機制" },
+    eyebrow: { en: "Privacy promise", "zh-TW": "隱私承諾" },
     title: {
-      en: "Consent, pricing, and progress stay visible",
-      "zh-TW": "同意、價格與進度全程透明",
+      en: "Family consent controls access to personal content",
+      "zh-TW": "未經家屬同意，平台無權查看內容",
     },
-    image:
-      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    image: "/privacy-records.jpg",
     caption: {
-      en: "Legal records, transparent quotes, partner verification, and audit trails protect every case.",
-      "zh-TW": "法律紀錄、透明報價、合作夥伴驗證與稽核軌跡守護每一個案件。",
+      en: "Offline-capable systems and access separation protect sensitive media and health data.",
+      "zh-TW": "離線雲端架構與權限隔離，保護影像、聲音與健康資料。",
     },
     chips: [
       { en: "Consent", "zh-TW": "同意" },
-      { en: "Pricing", "zh-TW": "報價" },
-      { en: "Audit", "zh-TW": "稽核" },
-      { en: "Verification", "zh-TW": "驗證" },
+      { en: "Isolation", "zh-TW": "隔離" },
+      { en: "Access", "zh-TW": "權限" },
+      { en: "Security", "zh-TW": "資安" },
     ],
   },
   {
     icon: Megaphone,
-    eyebrow: { en: "Community access", "zh-TW": "社區接觸" },
+    eyebrow: { en: "Channels", "zh-TW": "通路" },
     title: {
-      en: "Meet elders where planning conversations already happen",
-      "zh-TW": "在長者熟悉的生活場域開始未雨綢繆的對話",
+      en: "Reach families through care sites, online media, and delivery",
+      "zh-TW": "透過機構、網路與實體安裝觸及家庭",
     },
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    image: "/community-channels.jpg",
     caption: {
-      en: "Healthcare sites, markets, community centers, LINE, and social channels make the concept approachable.",
-      "zh-TW": "透過醫療院所、市場、社區中心、LINE 與社群平台，讓觀念更容易被理解。",
+      en: "Social media, blood centers, medical and long-term care institutions, e-commerce, and installation teams become the route to market.",
+      "zh-TW": "社群、捐血中心、醫療長照機構、電商與實體交付安裝，構成主要推廣通路。",
     },
     chips: [
-      { en: "LINE", "zh-TW": "LINE" },
-      { en: "Clinics", "zh-TW": "診所" },
-      { en: "Markets", "zh-TW": "市場" },
-      { en: "Community", "zh-TW": "社區" },
-    ],
-  },
-  {
-    icon: Landmark,
-    eyebrow: { en: "Sustainability", "zh-TW": "永續支持" },
-    title: {
-      en: "Shared payment paths keep service costs realistic",
-      "zh-TW": "以多方分擔讓服務成本更可負擔",
-    },
-    image:
-      "https://images.unsplash.com/photo-1554224154-26032ffc0d07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: {
-      en: "Personal contribution, public subsidy, partner discounts, and institutional payments can work together.",
-      "zh-TW": "本人負擔、政府補助、合作折扣與機構支付可共同支撐服務運作。",
-    },
-    chips: [
-      { en: "Subsidy", "zh-TW": "補助" },
-      { en: "Partner", "zh-TW": "合作" },
-      { en: "Family", "zh-TW": "家庭" },
-      { en: "Public", "zh-TW": "公部門" },
+      { en: "FB / IG", "zh-TW": "社群" },
+      { en: "Care sites", "zh-TW": "照護機構" },
+      { en: "E-commerce", "zh-TW": "電商" },
+      { en: "Install", "zh-TW": "安裝" },
     ],
   },
 ];
 
 const journeySteps = [
-  {
-    icon: FileCheck2,
-    label: { en: "Plan", "zh-TW": "規劃" },
-  },
-  {
-    icon: Database,
-    label: { en: "Record", "zh-TW": "建檔" },
-  },
-  {
-    icon: Building2,
-    label: { en: "Coordinate", "zh-TW": "協調" },
-  },
-  {
-    icon: Coins,
-    label: { en: "Support", "zh-TW": "支援" },
-  },
-  {
-    icon: ShieldCheck,
-    label: { en: "Remember", "zh-TW": "紀念" },
-  },
+  { icon: HeartPulse, label: { en: "Donate", "zh-TW": "捐血" } },
+  { icon: FileCheck2, label: { en: "Verify", "zh-TW": "查詢" } },
+  { icon: Coins, label: { en: "Apply points", "zh-TW": "申請點數" } },
+  { icon: ShoppingBag, label: { en: "Rent or buy", "zh-TW": "租賃或買斷" } },
+  { icon: ShieldCheck, label: { en: "Protect home", "zh-TW": "居家守護" } },
 ];
 
 const machineFlow = [
@@ -263,32 +277,32 @@ const machineFlow = [
   {
     icon: Wifi,
     label: { en: "Home unit", "zh-TW": "居家主機" },
-    detail: { en: "BLE, Wi-Fi, edge gateway", "zh-TW": "藍牙、Wi-Fi、邊緣閘道" },
+    detail: { en: "Health, movement, projector, recording", "zh-TW": "健康、行動、放映、錄音錄影" },
   },
   {
     icon: Cpu,
-    label: { en: "AI analysis", "zh-TW": "AI 分析" },
-    detail: { en: "Fall and anomaly detection", "zh-TW": "跌倒與異常偵測" },
+    label: { en: "Local software", "zh-TW": "專屬軟體系統" },
+    detail: { en: "Device OS and compatibility layer", "zh-TW": "硬體專屬系統與設備相容" },
   },
   {
     icon: Cloud,
-    label: { en: "Cloud platform", "zh-TW": "雲端平台" },
-    detail: { en: "Secure data and rules", "zh-TW": "安全資料與規則引擎" },
+    label: { en: "Offline-capable cloud", "zh-TW": "離線雲端系統" },
+    detail: { en: "Runs locally with privacy separation", "zh-TW": "可在終端獨立運行並保護隱私" },
   },
   {
     icon: Bell,
-    label: { en: "Family alerts", "zh-TW": "家屬通知" },
-    detail: { en: "LINE, SMS, app, call", "zh-TW": "LINE、簡訊、App、電話" },
+    label: { en: "Family updates", "zh-TW": "家屬同步" },
+    detail: { en: "LINE Bot, app, alerts, media upload", "zh-TW": "LINE Bot、App、警示與素材上傳" },
   },
 ];
 
 const additionalValues = [
-  { en: "Consent-first", "zh-TW": "同意優先" },
-  { en: "Audit trails", "zh-TW": "稽核軌跡" },
-  { en: "Grief support", "zh-TW": "悲傷支持" },
-  { en: "Natural burial", "zh-TW": "環保自然葬" },
-  { en: "Verified partners", "zh-TW": "認證合作夥伴" },
-  { en: "Accessible by LINE", "zh-TW": "LINE 友善使用" },
+  { en: "Transparent pricing", "zh-TW": "價格透明化" },
+  { en: "Privacy isolation", "zh-TW": "隱私絕對隔離" },
+  { en: "Easy elder operation", "zh-TW": "長者易操作" },
+  { en: "Family interaction", "zh-TW": "增進家屬互動" },
+  { en: "Device rental or purchase", "zh-TW": "設備租賃或買斷" },
+  { en: "Vendor partnerships", "zh-TW": "廠商合作分潤" },
 ];
 
 const socialContacts = [
@@ -333,20 +347,22 @@ export function Presentation() {
           <div className="max-w-3xl">
             <div className="mb-6 flex flex-wrap gap-2">
               <Badge className="border border-emerald-100 bg-emerald-50 text-emerald-700 hover:bg-emerald-50">
-                {language === "zh-TW" ? "以善終尊嚴為核心的社會創新" : "Social innovation for final dignity"}
+                {language === "zh-TW" ? "捐血點數 × 高齡照護設備" : "Blood donation points x elder-care devices"}
               </Badge>
               <Badge className="border border-blue-100 bg-blue-50 text-blue-700 hover:bg-blue-50">
-                {language === "zh-TW" ? "政府、醫療、法律與禮儀協作" : "Government, medical, legal, and funeral coordination"}
+                {language === "zh-TW" ? "居家安全、娛樂陪伴與數位遺產" : "Home safety, entertainment, and digital legacy"}
               </Badge>
             </div>
 
             <h1 className="text-4xl font-semibold leading-[1.05] tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
-              {language === "zh-TW" ? "值得信任的善終與身後事規劃平台。" : "A trusted platform for dignified end-of-life planning."}
+              {language === "zh-TW"
+                ? "用捐血回饋降低長照設備負擔，讓長輩在家更安全。"
+                : "Turn blood donation into care-device support for safer aging at home."}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
               {language === "zh-TW"
-                ? "樂齡家協助民眾預先規劃最後意願，串接公部門與醫療通報，安排禮儀服務，並建立數位紀念空間，讓每個人都能被尊重與記得。"
-                : "CareBridge helps people plan final wishes, coordinate public and medical reporting, arrange funeral services, and create a digital memorial so no one is left without dignity or remembrance."}
+                ? "樂齡家結合捐血點數、居家智慧設備、媒體陪伴與數位遺產服務，讓家屬更安心，也讓長輩獲得更容易使用的照護與娛樂體驗。"
+                : "CareBridge connects blood donation points, an integrated elder machine, media companionship, and digital legacy services so families feel safer and elders receive easier daily support."}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -355,7 +371,7 @@ export function Presentation() {
                   size="lg"
                   className="h-12 bg-emerald-700 px-6 text-base hover:bg-emerald-800"
                 >
-                  {language === "zh-TW" ? "開始規劃" : "Start planning"}
+                  {language === "zh-TW" ? "開始使用" : "Start using"}
                   <ArrowRight className="size-5" />
                 </Button>
               </Link>
@@ -375,12 +391,20 @@ export function Presentation() {
             />
             <div className="mt-4 grid grid-cols-2 gap-3">
               <div className="rounded-2xl bg-emerald-50 p-4">
-                <div className="text-sm text-emerald-700">{language === "zh-TW" ? "今日" : "Today"}</div>
-                <div className="mt-1 text-2xl font-semibold">{language === "zh-TW" ? "已登記" : "Registered"}</div>
+                <div className="text-sm text-emerald-700">
+                  {language === "zh-TW" ? "點數來源" : "Point source"}
+                </div>
+                <div className="mt-1 text-2xl font-semibold">
+                  {language === "zh-TW" ? "捐血紀錄" : "Donation records"}
+                </div>
               </div>
               <div className="rounded-2xl bg-blue-50 p-4">
-                <div className="text-sm text-blue-700">{language === "zh-TW" ? "案件狀態" : "Case status"}</div>
-                <div className="mt-1 text-2xl font-semibold">{language === "zh-TW" ? "可追蹤" : "Tracked"}</div>
+                <div className="text-sm text-blue-700">
+                  {language === "zh-TW" ? "使用方式" : "Use case"}
+                </div>
+                <div className="mt-1 text-2xl font-semibold">
+                  {language === "zh-TW" ? "設備折扣" : "Device discount"}
+                </div>
               </div>
             </div>
           </div>
@@ -401,15 +425,17 @@ export function Presentation() {
           <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.88fr_1fr] lg:px-8">
             <div>
               <Badge className="bg-blue-50 text-blue-700 hover:bg-blue-50">
-                {language === "zh-TW" ? "高齡智慧照護主機" : "Elder machine system"}
+                {language === "zh-TW" ? "一體式高齡照護設備" : "Integrated elder-care machine"}
               </Badge>
               <h2 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">
-                {language === "zh-TW" ? "安靜守護居家安全，必要時即時通知家人。" : "A home unit that watches quietly and alerts family when it matters."}
+                {language === "zh-TW"
+                  ? "健康監測、行動偵測、放映、錄音與錄影集中在同一台設備。"
+                  : "Health sensing, activity detection, projection, audio, and video in one home unit."}
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
                 {language === "zh-TW"
-                  ? "設備整合投影、攝影機、喇叭、麥克風、本地 AI、加密儲存與雲端通知，讓長者在家也能獲得更完整的安全照護。"
-                  : "The device combines a projector, camera, speaker, microphone, local AI, encrypted storage, and cloud alerts so elders can stay at home with stronger safety coverage."}
+                  ? "設備搭配專屬軟體與離線雲端系統，能在終端獨立運行，減少資料直接上傳第三方雲端，強化隱私保護。"
+                  : "The device pairs dedicated software with an offline-capable cloud system, allowing local operation while reducing direct upload of sensitive content to third-party cloud services."}
               </p>
 
               <div className="mt-8 rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
@@ -448,15 +474,15 @@ export function Presentation() {
                 <div className="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
                   <div className="rounded-2xl bg-white p-3 text-slate-600">
                     <Camera className="mx-auto mb-2 size-5 text-blue-700" />
-                    {language === "zh-TW" ? "影像" : "Vision"}
+                    {language === "zh-TW" ? "影像紀錄" : "Video record"}
                   </div>
                   <div className="rounded-2xl bg-white p-3 text-slate-600">
                     <Cpu className="mx-auto mb-2 size-5 text-emerald-700" />
-                    {language === "zh-TW" ? "邊緣 AI" : "Edge AI"}
+                    {language === "zh-TW" ? "專屬系統" : "Device OS"}
                   </div>
                   <div className="rounded-2xl bg-white p-3 text-slate-600">
                     <Bell className="mx-auto mb-2 size-5 text-rose-700" />
-                    {language === "zh-TW" ? "警示" : "Alerts"}
+                    {language === "zh-TW" ? "安全通知" : "Alerts"}
                   </div>
                 </div>
               </div>
@@ -466,14 +492,16 @@ export function Presentation() {
               <div className="mb-5 flex items-center justify-between gap-3">
                 <div>
                   <h3 className="text-2xl font-semibold text-slate-950">
-                    {language === "zh-TW" ? "監測流程" : "Monitoring flow"}
+                    {language === "zh-TW" ? "設備與平台流程" : "Device and platform flow"}
                   </h3>
                   <p className="mt-1 text-sm text-slate-500">
-                    {language === "zh-TW" ? "穿戴資料、本地 AI、雲端紀錄與家屬通知。" : "Wearable data, local AI, cloud records, and family alerts."}
+                    {language === "zh-TW"
+                      ? "從穿戴裝置、居家主機、專屬軟體到家屬同步。"
+                      : "From wearable devices and the home unit to dedicated software and family updates."}
                   </p>
                 </div>
                 <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50">
-                  {language === "zh-TW" ? "安全路徑" : "Secure path"}
+                  {language === "zh-TW" ? "隱私保護" : "Privacy first"}
                 </Badge>
               </div>
 
@@ -497,7 +525,10 @@ export function Presentation() {
               </div>
 
               <div className="mt-6 grid gap-3 rounded-2xl border border-rose-100 bg-rose-50 p-4 sm:grid-cols-5">
-                {(language === "zh-TW" ? ["跌倒", "SOS", "長時間無活動", "心率異常", "低電量"] : ["Fall", "SOS", "No activity", "Heart anomaly", "Low battery"]).map((alert) => (
+                {(language === "zh-TW"
+                  ? ["跌倒", "SOS", "行動異常", "健康異常", "設備異常"]
+                  : ["Fall", "SOS", "Activity anomaly", "Health anomaly", "Device issue"]
+                ).map((alert) => (
                   <div key={alert} className="rounded-xl bg-white px-3 py-2 text-center text-xs font-medium text-rose-700">
                     {alert}
                   </div>
@@ -515,20 +546,20 @@ export function Presentation() {
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
                 {language === "zh-TW"
-                  ? "平台結合善終意願登記、公部門案件協作、數位紀念與社會貢獻點數，連結照護與身後事支援。"
-                  : "The platform combines end-of-life preference registration, public-sector case coordination, digital memorials, and a contribution-points model connected to care and funeral support."}
+                  ? "我們把捐血回饋、硬體設備、軟體系統、媒體陪伴與數位遺產整合成一套可租賃、可買斷、也可客製化的高齡照護服務。"
+                  : "We combine donation rewards, hardware, software, media companionship, and digital legacy services into a rental, purchase, and customization model for elder care."}
               </p>
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
               {serviceCards.map((service) => (
-                <Card key={service.title} className="border-slate-200 bg-white shadow-sm">
+                <Card key={text(service.title, language)} className="border-slate-200 bg-white shadow-sm">
                   <CardContent className="p-6">
                     <div className={`mb-5 flex size-12 items-center justify-center rounded-2xl border ${service.tone}`}>
                       <service.icon className="size-6" />
                     </div>
-                  <h3 className="text-xl font-semibold text-slate-950">{text(service.title, language)}</h3>
-                  <p className="mt-3 leading-7 text-slate-600">{text(service.copy, language)}</p>
+                    <h3 className="text-xl font-semibold text-slate-950">{text(service.title, language)}</h3>
+                    <p className="mt-3 leading-7 text-slate-600">{text(service.copy, language)}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -540,10 +571,12 @@ export function Presentation() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-8 max-w-3xl">
               <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50">
-                {language === "zh-TW" ? "運作流程" : "How it works"}
+                {language === "zh-TW" ? "點數使用流程" : "Point journey"}
               </Badge>
               <h2 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">
-                {language === "zh-TW" ? "從規劃到紀念的視覺化路徑。" : "A visual path from planning to remembrance."}
+                {language === "zh-TW"
+                  ? "從捐血紀錄到照護設備折扣。"
+                  : "From blood donation records to care-device discounts."}
               </h2>
             </div>
 
@@ -575,7 +608,9 @@ export function Presentation() {
                 {language === "zh-TW" ? "視覺化服務地圖" : "Visual service map"}
               </Badge>
               <h2 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">
-                {language === "zh-TW" ? "用人物、場域與行動呈現服務模式。" : "The model shown through people, places, and actions."}
+                {language === "zh-TW"
+                  ? "用場景呈現新的服務模式。"
+                  : "The updated model shown through service scenarios."}
               </h2>
             </div>
 
@@ -619,19 +654,54 @@ export function Presentation() {
           </div>
         </section>
 
+        <section className="bg-white py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-8 max-w-3xl">
+              <Badge className="bg-amber-50 text-amber-700 hover:bg-amber-50">
+                {language === "zh-TW" ? "關鍵合作夥伴" : "Key partners"}
+              </Badge>
+              <h2 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">
+                {language === "zh-TW"
+                  ? "讓設備、點數、雲端與銷售通路一起運作。"
+                  : "Partners connect devices, points, cloud infrastructure, and sales channels."}
+              </h2>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {partnerCards.map((partner) => (
+                <Card key={text(partner.title, language)} className="border-slate-200 bg-slate-50 shadow-sm">
+                  <CardContent className="p-5">
+                    <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-white text-emerald-700">
+                      <partner.icon className="size-6" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-slate-950">
+                      {text(partner.title, language)}
+                    </h3>
+                    <p className="mt-3 leading-7 text-slate-600">
+                      {text(partner.detail, language)}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="bg-slate-950 py-14 text-white">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:px-8">
             <div>
               <Badge className="bg-white/10 text-white hover:bg-white/10">
-                {language === "zh-TW" ? "額外信任價值" : "Additional values to add"}
+                {language === "zh-TW" ? "顧客關係與收益" : "Customer trust and revenue"}
               </Badge>
               <h2 className="mt-5 text-3xl font-semibold sm:text-4xl">
-                {language === "zh-TW" ? "信任不是功能，而是服務本身。" : "Trust is the product, not only a feature."}
+                {language === "zh-TW"
+                  ? "透明價格、隱私隔離與易操作設備是核心信任。"
+                  : "Transparent pricing, privacy isolation, and easy operation build trust."}
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-300">
                 {language === "zh-TW"
-                  ? "因為服務涉及死亡、家屬焦慮、公部門流程、金錢與記憶，網站需要強調同意、合法性、透明度與情感支持。"
-                  : "Because this service handles death, family anxiety, public systems, money, and memory, the website should emphasize consent, legality, transparency, and emotional support."}
+                  ? "收益來自設備租賃或買斷、數位遺產客製化、影片分類後製，以及廠商合作與分潤。"
+                  : "Revenue comes from device rental or purchase, digital legacy customization, media classification and editing, and partner revenue sharing."}
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -651,8 +721,8 @@ export function Presentation() {
               <BrandLogo />
               <p className="mt-5 max-w-md leading-7 text-slate-600">
                 {language === "zh-TW"
-                  ? "一個協助善終規劃、政府通報、禮儀服務、數位紀念與貢獻點數照護支援的可信任平台。"
-                  : "A trusted coordination platform for end-of-life planning, government reporting, funeral services, digital memorials, and contribution-based care support."}
+                  ? "結合捐血回饋、硬體研發、居家照護、媒體陪伴與數位遺產的高齡科技服務。"
+                  : "An elder-tech service combining blood donation rewards, hardware development, home care, media companionship, and digital legacy."}
               </p>
             </div>
 

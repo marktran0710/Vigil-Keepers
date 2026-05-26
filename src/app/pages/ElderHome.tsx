@@ -22,7 +22,7 @@ import { ActionCard } from "../components/ActionCard";
 import { ThreeBackground } from "../components/ThreeBackground";
 
 const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200";
+  "/elder-home-safety.svg";
 const IMAGE_FALLBACK =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImage not available%3C/text%3E%3C/svg%3E";
 
