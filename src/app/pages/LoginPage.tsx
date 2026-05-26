@@ -7,45 +7,62 @@ import { Card, CardContent } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { UserRole, useAuth } from "../context/AuthContext";
+import { Language, useLanguage } from "../context/LanguageContext";
+
+type LocalizedText = {
+  en: string;
+  "zh-TW": string;
+};
+
+const text = (value: LocalizedText, language: Language) => value[language] || value.en;
 
 const loginModes: Record<
   UserRole,
   {
-    title: string;
-    eyebrow: string;
-    description: string;
+    title: LocalizedText;
+    eyebrow: LocalizedText;
+    description: LocalizedText;
     destination: string;
     icon: typeof ShieldCheck;
     accent: string;
-    button: string;
+    button: LocalizedText;
   }
 > = {
   admin: {
-    title: "Administrator login",
-    eyebrow: "Admin mode",
-    description: "For service operators managing elders, care teams, schedules, and requests.",
+    title: { en: "Administrator login", "zh-TW": "管理者登入" },
+    eyebrow: { en: "Admin mode", "zh-TW": "管理者模式" },
+    description: {
+      en: "For service operators managing elders, care teams, schedules, and requests.",
+      "zh-TW": "提供服務營運人員管理長者資料、照護團隊、排程與服務請求。",
+    },
     destination: "/admin",
     icon: ShieldCheck,
     accent: "bg-slate-100 text-slate-800 border-slate-200",
-    button: "Enter admin console",
+    button: { en: "Enter admin console", "zh-TW": "進入管理控制台" },
   },
   elder: {
-    title: "Elder user login",
-    eyebrow: "Elder mode",
-    description: "For elders using wellness check-ins, reminders, messages, and family contact.",
+    title: { en: "Elder user login", "zh-TW": "長者登入" },
+    eyebrow: { en: "Elder mode", "zh-TW": "長者模式" },
+    description: {
+      en: "For elders using wellness check-ins, reminders, messages, and family contact.",
+      "zh-TW": "提供長者進行健康確認、提醒、訊息與家屬聯絡。",
+    },
     destination: "/elder",
     icon: HeartPulse,
     accent: "bg-emerald-50 text-emerald-700 border-emerald-100",
-    button: "Enter elder view",
+    button: { en: "Enter elder view", "zh-TW": "進入長者介面" },
   },
   family: {
-    title: "Family login",
-    eyebrow: "Family mode",
-    description: "For family members reviewing updates, tasks, visits, and care communication.",
+    title: { en: "Family login", "zh-TW": "家屬登入" },
+    eyebrow: { en: "Family mode", "zh-TW": "家屬模式" },
+    description: {
+      en: "For family members reviewing updates, tasks, visits, and care communication.",
+      "zh-TW": "提供家屬查看照護更新、任務、訪視與照護溝通。",
+    },
     destination: "/family",
     icon: Users,
     accent: "bg-blue-50 text-blue-700 border-blue-100",
-    button: "Enter family dashboard",
+    button: { en: "Enter family dashboard", "zh-TW": "進入家屬儀表板" },
   },
 };
 
@@ -58,6 +75,7 @@ export function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, role: activeRole } = useAuth();
+  const { language } = useLanguage();
 
   if (!isUserRole(roleParam)) {
     return <Navigate to="/" replace />;
@@ -81,21 +99,22 @@ export function LoginPage() {
         <div className="grid w-full gap-8 lg:grid-cols-[0.92fr_1fr] lg:items-center">
           <div>
             <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950">
-              Back to workspace selection
+              {language === "zh-TW" ? "返回首頁" : "Back to workspace selection"}
             </Link>
             <Badge className={`mt-8 border ${mode.accent}`}>
-              {mode.eyebrow}
+              {text(mode.eyebrow, language)}
             </Badge>
             <h1 className="mt-4 text-4xl font-semibold leading-tight sm:text-5xl">
-              {mode.title}
+              {text(mode.title, language)}
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
-              {mode.description}
+              {text(mode.description, language)}
             </p>
             {activeRole && activeRole !== roleParam ? (
               <p className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-                You are currently signed into another mode. Continuing here will
-                switch this browser session to {mode.eyebrow.toLowerCase()}.
+                {language === "zh-TW"
+                  ? `目前瀏覽器已登入其他模式，繼續操作會切換到${text(mode.eyebrow, language)}。`
+                  : `You are currently signed into another mode. Continuing here will switch this browser session to ${text(mode.eyebrow, language).toLowerCase()}.`}
               </p>
             ) : null}
           </div>
@@ -108,7 +127,7 @@ export function LoginPage() {
 
               <form className="space-y-5" onSubmit={handleLogin}>
                 <div className="space-y-2">
-                  <Label htmlFor="user-id">User ID</Label>
+                  <Label htmlFor="user-id">{language === "zh-TW" ? "使用者 ID" : "User ID"}</Label>
                   <Input
                     id="user-id"
                     placeholder={`${roleParam}.demo`}
@@ -116,24 +135,25 @@ export function LoginPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{language === "zh-TW" ? "密碼" : "Password"}</Label>
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Prototype password"
+                    placeholder={language === "zh-TW" ? "原型密碼" : "Prototype password"}
                     autoComplete="current-password"
                   />
                 </div>
 
                 <Button className="h-12 w-full bg-emerald-700 text-base hover:bg-emerald-800">
-                  {mode.button}
+                  {text(mode.button, language)}
                   <ArrowRight className="size-5" />
                 </Button>
               </form>
 
               <p className="mt-5 text-sm leading-6 text-slate-500">
-                Prototype note: each login activates only this selected mode in
-                the browser session.
+                {language === "zh-TW"
+                  ? "原型說明：每次登入只會啟用目前選擇的模式。"
+                  : "Prototype note: each login activates only this selected mode in the browser session."}
               </p>
             </CardContent>
           </Card>

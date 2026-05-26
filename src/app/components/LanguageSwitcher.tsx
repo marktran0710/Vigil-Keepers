@@ -10,15 +10,14 @@ import {
 import { Button } from "./ui/button";
 
 const languageOptions: { code: Language; label: string }[] = [
-  { code: "zh-TW", label: "Chinese" },
+  { code: "zh-TW", label: "中文" },
   { code: "en", label: "English" },
-  { code: "vi", label: "Vietnamese" },
 ];
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
   const currentLanguageLabel =
-    languageOptions.find((option) => option.code === language)?.label || "English";
+    languageOptions.find((option) => option.code === language)?.label || "中文";
 
   return (
     <DropdownMenu>
