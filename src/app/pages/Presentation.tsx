@@ -28,7 +28,6 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
-import { ThreeBackground } from "../components/ThreeBackground";
 import { BrandLogo } from "../components/BrandLogo";
 
 const serviceCards = [
@@ -194,7 +193,6 @@ const socialContacts = [
 export function Presentation() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#f7faf8] text-slate-950">
-      <ThreeBackground />
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <BrandLogo compact />

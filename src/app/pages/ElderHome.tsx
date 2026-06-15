@@ -19,7 +19,6 @@ import { Card } from "../components/ui/card";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { NavItem } from "../components/NavItem";
 import { ActionCard } from "../components/ActionCard";
-import { ThreeBackground } from "../components/ThreeBackground";
 
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200";
@@ -62,7 +61,6 @@ export function ElderHome() {
 
   return (
     <div className="relative min-h-screen bg-[#f7faf4] text-slate-950">
-      <ThreeBackground />
 
       <nav className="relative z-10 border-b border-emerald-100 bg-white/95 px-4 py-4 shadow-sm backdrop-blur sm:px-6 md:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
