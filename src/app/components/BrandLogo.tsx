@@ -15,7 +15,7 @@ export function BrandLogo({
   return (
     <div className={`flex items-center ${className}`}>
       <img
-        src="/lelingjia-logo.svg"
+        src="/images/logo.png"
         alt="樂齡家 logo"
         className={`${size} w-auto shrink-0 object-contain`}
       />

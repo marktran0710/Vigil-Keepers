@@ -20,9 +20,9 @@ import { BrandLogo } from "../components/BrandLogo";
 import { useLanguage } from "../context/LanguageContext";
 
 const serviceImages = [
-  "https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-  "https://images.unsplash.com/photo-1615461066841-6116e61058f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-  "https://images.unsplash.com/photo-1609220136736-443140cffec6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+  "/images/service-monitoring.jpg",
+  "/images/service-donation.jpg",
+  "/images/service-legacy.jpg",
 ];
 
 const serviceIcons = [HeartPulse, Coins, Database];
@@ -111,7 +111,7 @@ export function Presentation() {
               </div>
               <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
                 <img
-                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900"
+                  src="/images/hero.jpg"
                   alt="Elder with family at home"
                   className="aspect-[4/3] w-full object-cover"
                 />
@@ -184,7 +184,7 @@ export function Presentation() {
               </div>
               <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
                 <img
-                  src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900"
+                  src="/images/steps-care.jpg"
                   alt="Family care coordination"
                   className="aspect-[4/3] w-full object-cover"
                 />
