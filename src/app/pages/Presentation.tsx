@@ -17,57 +17,50 @@ import { Link } from "react-router";
 import { Button } from "../components/ui/button";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { BrandLogo } from "../components/BrandLogo";
+import { useLanguage } from "../context/LanguageContext";
 
-const stats = [
-  { value: "桃竹苗", label: "服務區域" },
-  { value: "1 台", label: "整合式照護設備" },
-  { value: "100%", label: "家屬同意才開放查看" },
-  { value: "0 元", label: "捐血達標即享折扣" },
+const serviceImages = [
+  "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+  "https://images.unsplash.com/photo-1615461066841-6116e61058f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+  "https://images.unsplash.com/photo-1609220136736-443140cffec6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
 ];
 
-const services = [
-  {
-    icon: HeartPulse,
-    title: "居家安全監測",
-    description:
-      "整合健康監測、行動偵測與緊急警報，讓家屬即時掌握長輩的居家狀況，有事立即通知。",
-  },
-  {
-    icon: Coins,
-    title: "捐血點數兌換",
-    description:
-      "每次捐血可累積點數，用於折抵照護設備租賃費用。善心捐血直接轉化為自身或家人的長照保障。",
-  },
-  {
-    icon: Database,
-    title: "數位遺產保存",
-    description:
-      "設備自動播放家屬上傳的影片與照片，減少長輩被遺忘感。家屬也可委託後製，留存珍貴回憶。",
-  },
-];
-
-const steps = [
-  { step: "01", icon: HandHeart, title: "前往捐血", desc: "至新竹捐血中心（桃竹苗地區）完成捐血。" },
-  { step: "02", icon: Coins, title: "累積點數", desc: "捐血次數由我方轉換為照護點數。" },
-  { step: "03", icon: ShieldCheck, title: "申請設備", desc: "以點數折抵設備租賃或買斷費用。" },
-  { step: "04", icon: HeartPulse, title: "居家守護", desc: "設備安裝到位，長輩安全即時回報家屬。" },
-];
-
-const partners = [
-  { icon: Building2, name: "新竹捐血中心", note: "台灣血液基金會 · 桃竹苗地區" },
-  { icon: Users, name: "國立中央大學", note: "機械／電機／資工系 · 設備研發" },
-  { icon: ShieldCheck, name: "法律與公證顧問", note: "契約保障 · 資料合規" },
-  { icon: Bell, name: "Google／Amazon", note: "雲端算力與安全儲存支援" },
-];
-
-const commitments = [
-  "價格透明，無隱藏費用",
-  "高隱私性，家屬同意才開放查看",
-  "設備操作簡易，適合長輩使用",
-  "家屬可自行上傳內容，增進互動",
-];
+const serviceIcons = [HeartPulse, Coins, Database];
+const stepIcons = [HandHeart, Coins, ShieldCheck, HeartPulse];
+const partnerIcons = [Building2, Users, ShieldCheck, Bell];
 
 export function Presentation() {
+  const { t } = useLanguage();
+
+  const services = [
+    { icon: serviceIcons[0], title: t("s1Title"), desc: t("s1Desc"), img: serviceImages[0] },
+    { icon: serviceIcons[1], title: t("s2Title"), desc: t("s2Desc"), img: serviceImages[1] },
+    { icon: serviceIcons[2], title: t("s3Title"), desc: t("s3Desc"), img: serviceImages[2] },
+  ];
+
+  const steps = [
+    { step: "01", icon: stepIcons[0], title: t("step1Title"), desc: t("step1Desc") },
+    { step: "02", icon: stepIcons[1], title: t("step2Title"), desc: t("step2Desc") },
+    { step: "03", icon: stepIcons[2], title: t("step3Title"), desc: t("step3Desc") },
+    { step: "04", icon: stepIcons[3], title: t("step4Title"), desc: t("step4Desc") },
+  ];
+
+  const partners = [
+    { icon: partnerIcons[0], name: t("p1Name"), note: t("p1Note") },
+    { icon: partnerIcons[1], name: t("p2Name"), note: t("p2Note") },
+    { icon: partnerIcons[2], name: t("p3Name"), note: t("p3Note") },
+    { icon: partnerIcons[3], name: t("p4Name"), note: t("p4Note") },
+  ];
+
+  const commitments = [t("c1"), t("c2"), t("c3"), t("c4")];
+
+  const stats = [
+    { value: t("statsAreaValue"), label: t("statsAreaLabel") },
+    { value: t("statsDeviceValue"), label: t("statsDeviceLabel") },
+    { value: t("statsPrivacyValue"), label: t("statsPrivacyLabel") },
+    { value: t("statsDiscountValue"), label: t("statsDiscountLabel") },
+  ];
+
   return (
     <div className="min-h-screen bg-white text-slate-900">
       {/* Header */}
@@ -76,13 +69,13 @@ export function Presentation() {
           <BrandLogo compact />
           <div className="flex items-center gap-2">
             <Link to="/login/elder">
-              <Button variant="ghost" size="sm">長輩介面</Button>
+              <Button variant="ghost" size="sm">{t("elderPortal")}</Button>
             </Link>
             <Link to="/login/family">
-              <Button variant="ghost" size="sm">家屬介面</Button>
+              <Button variant="ghost" size="sm">{t("familyPortal")}</Button>
             </Link>
             <Link to="/login/admin" className="hidden md:block">
-              <Button variant="ghost" size="sm">管理員</Button>
+              <Button variant="ghost" size="sm">{t("admin")}</Button>
             </Link>
             <LanguageSwitcher />
           </div>
@@ -91,38 +84,44 @@ export function Presentation() {
 
       <main>
         {/* Hero */}
-        <section className="border-b border-slate-100 bg-slate-50">
-          <div className="mx-auto max-w-6xl px-6 py-16 lg:py-24">
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-block rounded-full bg-emerald-100 px-4 py-1 text-sm font-medium text-emerald-700">
-                桃竹苗地區長照社會創新 NPO
-              </span>
-              <h1 className="mt-6 text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
-                用捐血守護長輩，
-                <br />
-                讓善行成為長照保障
-              </h1>
-              <p className="mt-5 text-lg leading-8 text-slate-600">
-                Vigil Keepers 結合捐血點數與居家照護設備，
-                讓您的每一次捐血轉化為家中長輩的安全守護與溫暖陪伴。
-              </p>
-              <div className="mt-8 flex justify-center gap-3">
-                <Link to="/login/elder">
-                  <Button className="bg-emerald-700 hover:bg-emerald-800 px-6">
-                    長輩入口
-                    <ArrowRight className="size-4" />
-                  </Button>
-                </Link>
-                <Link to="/login/family">
-                  <Button variant="outline" className="px-6">家屬管理介面</Button>
-                </Link>
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-6xl px-6 py-14 lg:py-20">
+            <div className="grid items-center gap-10 lg:grid-cols-2">
+              <div>
+                <span className="inline-block rounded-full bg-emerald-100 px-4 py-1 text-sm font-medium text-emerald-700">
+                  {t("heroTag")}
+                </span>
+                <h1 className="mt-5 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl lg:text-5xl">
+                  {t("heroTitle")}
+                </h1>
+                <p className="mt-4 text-base leading-8 text-slate-600 sm:text-lg">
+                  {t("heroDesc")}
+                </p>
+                <div className="mt-7 flex gap-3">
+                  <Link to="/login/elder">
+                    <Button className="bg-emerald-700 hover:bg-emerald-800 px-5">
+                      {t("elderEntry")}
+                      <ArrowRight className="size-4" />
+                    </Button>
+                  </Link>
+                  <Link to="/login/family">
+                    <Button variant="outline" className="px-5">{t("familyDashboard")}</Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+                <img
+                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900"
+                  alt="Elder with family at home"
+                  className="aspect-[4/3] w-full object-cover"
+                />
               </div>
             </div>
           </div>
         </section>
 
         {/* Stats */}
-        <section className="border-b border-slate-100">
+        <section className="border-b border-slate-100 bg-slate-50">
           <div className="mx-auto max-w-6xl px-6 py-10">
             <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
               {stats.map(({ value, label }) => (
@@ -139,17 +138,24 @@ export function Presentation() {
         <section className="border-b border-slate-100 py-16">
           <div className="mx-auto max-w-6xl px-6">
             <div className="mb-10 text-center">
-              <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">我們提供什麼</h2>
-              <p className="mt-3 text-slate-500">三項核心服務，讓長照更有溫度、更有保障。</p>
+              <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">{t("servicesTitle")}</h2>
+              <p className="mt-3 text-slate-500">{t("servicesSubtitle")}</p>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
               {services.map((s) => (
-                <div key={s.title} className="rounded-xl border border-slate-200 bg-white p-6">
-                  <div className="flex size-11 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
-                    <s.icon className="size-5" />
+                <div key={s.title} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    className="aspect-[16/9] w-full object-cover"
+                  />
+                  <div className="p-5">
+                    <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
+                      <s.icon className="size-5" />
+                    </div>
+                    <h3 className="mt-3 text-base font-semibold text-slate-900">{s.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-slate-600">{s.desc}</p>
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">{s.description}</p>
                 </div>
               ))}
             </div>
@@ -159,21 +165,30 @@ export function Presentation() {
         {/* How it works */}
         <section className="border-b border-slate-100 bg-slate-50 py-16">
           <div className="mx-auto max-w-6xl px-6">
-            <div className="mb-10 text-center">
-              <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">服務流程</h2>
-              <p className="mt-3 text-slate-500">從捐血到守護長輩，四個簡單步驟。</p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {steps.map((s) => (
-                <div key={s.step} className="rounded-xl border border-slate-200 bg-white p-6">
-                  <div className="text-3xl font-bold text-slate-200">{s.step}</div>
-                  <div className="mt-3 flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
-                    <s.icon className="size-5" />
-                  </div>
-                  <h3 className="mt-3 font-semibold text-slate-900">{s.title}</h3>
-                  <p className="mt-1 text-sm leading-6 text-slate-500">{s.desc}</p>
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">{t("stepsTitle")}</h2>
+                <p className="mt-3 text-slate-500">{t("stepsSubtitle")}</p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  {steps.map((s) => (
+                    <div key={s.step} className="rounded-xl border border-slate-200 bg-white p-5">
+                      <div className="text-2xl font-bold text-slate-200">{s.step}</div>
+                      <div className="mt-2 flex size-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
+                        <s.icon className="size-4" />
+                      </div>
+                      <h3 className="mt-3 text-sm font-semibold text-slate-900">{s.title}</h3>
+                      <p className="mt-1 text-xs leading-6 text-slate-500">{s.desc}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+                <img
+                  src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900"
+                  alt="Family care coordination"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -182,8 +197,8 @@ export function Presentation() {
         <section className="border-b border-slate-100 py-16">
           <div className="mx-auto max-w-6xl px-6">
             <div className="mb-10 text-center">
-              <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">關鍵合作夥伴</h2>
-              <p className="mt-3 text-slate-500">與專業機構協力，共同實現長照社會創新。</p>
+              <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">{t("partnersTitle")}</h2>
+              <p className="mt-3 text-slate-500">{t("partnersSubtitle")}</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {partners.map((p) => (
@@ -192,7 +207,7 @@ export function Presentation() {
                     <p.icon className="size-5" />
                   </div>
                   <div>
-                    <div className="font-semibold text-slate-900 text-sm">{p.name}</div>
+                    <div className="text-sm font-semibold text-slate-900">{p.name}</div>
                     <div className="mt-0.5 text-xs text-slate-500">{p.note}</div>
                   </div>
                 </div>
@@ -206,10 +221,8 @@ export function Presentation() {
           <div className="mx-auto max-w-6xl px-6">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               <div>
-                <h2 className="text-2xl font-bold sm:text-3xl">我們對您的承諾</h2>
-                <p className="mt-3 text-emerald-100">
-                  這項服務涉及長輩的隱私與家屬的安心，我們以透明與尊重為首要原則。
-                </p>
+                <h2 className="text-2xl font-bold sm:text-3xl">{t("commitTitle")}</h2>
+                <p className="mt-3 text-emerald-100">{t("commitDesc")}</p>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {commitments.map((c) => (
@@ -229,10 +242,7 @@ export function Presentation() {
             <div className="grid gap-8 md:grid-cols-[1fr_auto]">
               <div>
                 <BrandLogo />
-                <p className="mt-4 max-w-sm text-sm leading-7 text-slate-500">
-                  桃竹苗長照社會創新 NPO，結合捐血點數、居家照護設備與數位遺產服務，
-                  讓善行成為家人最好的長照保障。
-                </p>
+                <p className="mt-4 max-w-sm text-sm leading-7 text-slate-500">{t("footerDesc")}</p>
               </div>
               <div className="space-y-3 text-sm text-slate-600">
                 <div className="flex items-center gap-3">
@@ -245,12 +255,12 @@ export function Presentation() {
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="size-4 shrink-0 text-emerald-700" />
-                  <span>桃園市中壢區中大路 300 號</span>
+                  <span>{t("address")}</span>
                 </div>
               </div>
             </div>
             <div className="mt-10 border-t border-slate-100 pt-6 text-center text-xs text-slate-400">
-              © 2025 Vigil Keepers. 守護者計畫 · 非營利組織
+              {t("footerCopy")}
             </div>
           </div>
         </footer>
