@@ -69,7 +69,7 @@ const translations: Record<Language, Record<string, string>> = {
     c4: "家屬可自行上傳內容，增進互動",
     // footer
     footerDesc: "桃竹苗長照社會創新 NPO，結合捐血點數、居家照護設備與數位遺產服務，讓善行成為家人最好的長照保障。",
-    footerCopy: "© 2025 Vigil Keepers · 守護者計畫 · 非營利組織",
+    footerCopy: "© 2026 Vigil Keepers · 守護者計畫 · 非營利組織",
     address: "桃園市中壢區中大路 300 號",
     // pages
     home: "首頁",
@@ -304,7 +304,7 @@ const translations: Record<Language, Record<string, string>> = {
     c4: "Family can upload content anytime to enhance interaction",
     // footer
     footerDesc: "NPO for elder care innovation in the Taoyuan region, combining blood donation points, home care devices, and digital legacy services.",
-    footerCopy: "© 2025 Vigil Keepers · Guardian Program · Non-Profit Organization",
+    footerCopy: "© 2026 Vigil Keepers · Guardian Program · Non-Profit Organization",
     address: "No. 300, Zhongda Rd., Zhongli District, Taoyuan City",
     // pages
     home: "Home",
