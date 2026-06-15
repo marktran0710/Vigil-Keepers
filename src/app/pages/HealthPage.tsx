@@ -3,15 +3,18 @@ import { Activity, ArrowLeft, CalendarCheck, HeartPulse, Pill, ShieldCheck } fro
 import { Link } from "react-router";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
-
-const metrics = [
-  ["Heart rate", "72 bpm", "Normal", HeartPulse, "text-rose-600 bg-rose-50"],
-  ["Blood pressure", "120/80", "Optimal", Activity, "text-blue-600 bg-blue-50"],
-  ["Medication", "1 due today", "Lunch reminder", Pill, "text-amber-600 bg-amber-50"],
-  ["Care visit", "Tomorrow", "10:00 AM", CalendarCheck, "text-emerald-600 bg-emerald-50"],
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export function HealthPage() {
+  const { t } = useLanguage();
+
+  const metrics = [
+    [t("hHeartRate"), t("hHeartRateValue"), t("hHeartRateDetail"), HeartPulse, "text-rose-600 bg-rose-50"],
+    [t("hBloodPressure"), t("hBloodPressureValue"), t("hBloodPressureDetail"), Activity, "text-blue-600 bg-blue-50"],
+    [t("hMedication"), t("hMedicationValue"), t("hMedicationDetail"), Pill, "text-amber-600 bg-amber-50"],
+    [t("hCareVisit"), t("hCareVisitValue"), t("hCareVisitDetail"), CalendarCheck, "text-emerald-600 bg-emerald-50"],
+  ];
+
   return (
     <div className="min-h-screen bg-[#f7faf8] px-4 py-6 text-slate-950 sm:px-6 lg:px-8">
       <main className="mx-auto max-w-6xl">
@@ -19,19 +22,19 @@ export function HealthPage() {
           <Link to="/elder">
             <Button variant="outline" className="bg-white">
               <ArrowLeft className="size-4" />
-              Back
+              {t("back")}
             </Button>
           </Link>
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2 text-sm font-medium text-emerald-700">
             <ShieldCheck className="size-4" />
-            Wellness status stable
+            {t("wellnessStatusStable")}
           </div>
         </div>
 
         <section className="mb-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8">
-          <h1 className="text-4xl font-semibold sm:text-5xl">Today&apos;s wellness</h1>
+          <h1 className="text-4xl font-semibold sm:text-5xl">{t("todayWellness")}</h1>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-            A simple view of important health signals, medication timing, and upcoming care support.
+            {t("todayWellnessDesc")}
           </p>
         </section>
 

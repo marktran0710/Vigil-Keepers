@@ -16,46 +16,48 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useAuth } from "../context/AuthContext";
-
-const operations = [
-  {
-    label: "Active elders",
-    value: "128",
-    detail: "6 require follow-up today",
-    icon: HeartPulse,
-    tone: "bg-emerald-50 text-emerald-700 border-emerald-100",
-  },
-  {
-    label: "Care workers",
-    value: "24",
-    detail: "18 currently assigned",
-    icon: Users,
-    tone: "bg-blue-50 text-blue-700 border-blue-100",
-  },
-  {
-    label: "Open requests",
-    value: "17",
-    detail: "4 high priority",
-    icon: ClipboardList,
-    tone: "bg-amber-50 text-amber-700 border-amber-100",
-  },
-];
-
-const queue = [
-  ["High", "Medication missed", "Mrs. Chen", "Assign nurse callback"],
-  ["Medium", "Family requested visit change", "Mr. Lin", "Confirm new schedule"],
-  ["Low", "Device sync delayed", "Mr. Huang", "Send setup guide"],
-];
-
-const schedule = [
-  ["09:30", "Home visit", "Da'an District", "Assigned"],
-  ["11:00", "Wellness review", "Remote", "Pending notes"],
-  ["14:30", "Care plan update", "Zhongshan District", "Confirmed"],
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export function AdminDashboard() {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
+
+  const operations = [
+    {
+      label: t("activeElders"),
+      value: "128",
+      detail: t("activeEldersDetail"),
+      icon: HeartPulse,
+      tone: "bg-emerald-50 text-emerald-700 border-emerald-100",
+    },
+    {
+      label: t("careWorkers"),
+      value: "24",
+      detail: t("careWorkersDetail"),
+      icon: Users,
+      tone: "bg-blue-50 text-blue-700 border-blue-100",
+    },
+    {
+      label: t("openRequests"),
+      value: "17",
+      detail: t("openRequestsDetail"),
+      icon: ClipboardList,
+      tone: "bg-amber-50 text-amber-700 border-amber-100",
+    },
+  ];
+
+  const queue = [
+    [t("priorityHigh"), t("queueIssue1"), t("queueElder1"), t("queueAction1")],
+    [t("priorityMedium"), t("queueIssue2"), t("queueElder2"), t("queueAction2")],
+    [t("priorityLow"), t("queueIssue3"), t("queueElder3"), t("queueAction3")],
+  ];
+
+  const schedule = [
+    ["09:30", t("scheduleTask1"), t("scheduleLoc1"), t("scheduleStatus1")],
+    ["11:00", t("scheduleTask2"), t("scheduleLoc2"), t("scheduleStatus2")],
+    ["14:30", t("scheduleTask3"), t("scheduleLoc3"), t("scheduleStatus3")],
+  ];
 
   const handleLogout = () => {
     logout();
@@ -72,10 +74,10 @@ export function AdminDashboard() {
             </div>
             <div>
               <h1 className="text-xl font-semibold leading-tight">
-                Administrator console
+                {t("adminConsoleTitle")}
               </h1>
               <p className="text-sm text-slate-500">
-                Service operations, care requests, and team coordination
+                {t("adminConsoleDesc")}
               </p>
             </div>
           </div>
@@ -84,13 +86,13 @@ export function AdminDashboard() {
             <Link to="/">
               <Button variant="outline" size="sm" className="bg-white">
                 <Home className="size-4" />
-                Home
+                {t("home")}
               </Button>
             </Link>
             <LanguageSwitcher />
             <Button variant="outline" size="sm" className="bg-white" onClick={handleLogout}>
               <LogOut className="size-4" />
-              Logout
+              {t("logout")}
             </Button>
           </div>
         </div>
@@ -101,19 +103,18 @@ export function AdminDashboard() {
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-100">
-                Admin mode
+                {t("adminModeBadge")}
               </Badge>
               <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
-                Coordinate care services with clear priorities.
+                {t("adminHeroTitle")}
               </h2>
               <p className="mt-3 max-w-3xl leading-7 text-slate-600">
-                Administrators can monitor service demand, review exceptions,
-                assign care workers, and keep families informed from one console.
+                {t("adminHeroDesc")}
               </p>
             </div>
             <Button className="h-12 bg-slate-950 px-5 text-base hover:bg-slate-800">
               <CalendarClock className="size-5" />
-              Review schedule
+              {t("reviewSchedule")}
             </Button>
           </div>
         </section>
@@ -142,7 +143,7 @@ export function AdminDashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertTriangle className="size-5 text-amber-600" />
-                Care request queue
+                {t("careRequestQueue")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -153,9 +154,9 @@ export function AdminDashboard() {
                 >
                   <Badge
                     className={
-                      priority === "High"
+                      priority === t("priorityHigh")
                         ? "w-fit bg-rose-100 text-rose-700 hover:bg-rose-100"
-                        : priority === "Medium"
+                        : priority === t("priorityMedium")
                           ? "w-fit bg-amber-100 text-amber-700 hover:bg-amber-100"
                           : "w-fit bg-slate-100 text-slate-700 hover:bg-slate-100"
                     }
@@ -178,7 +179,7 @@ export function AdminDashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle2 className="size-5 text-emerald-600" />
-                Today&apos;s care schedule
+                {t("todayScheduleTitle")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">

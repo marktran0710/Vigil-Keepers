@@ -25,32 +25,32 @@ const HERO_IMAGE =
 const IMAGE_FALLBACK =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImage not available%3C/text%3E%3C/svg%3E";
 
-const todayCards = [
-  {
-    icon: ShieldCheck,
-    label: "Care status",
-    value: "All good",
-    detail: "Last check-in 8:45 AM",
-    tone: "bg-emerald-50 text-emerald-700 border-emerald-100",
-  },
-  {
-    icon: Pill,
-    label: "Medication",
-    value: "Next: 12:30",
-    detail: "Lunch reminder ready",
-    tone: "bg-amber-50 text-amber-700 border-amber-100",
-  },
-  {
-    icon: CalendarCheck,
-    label: "Visit",
-    value: "Tomorrow",
-    detail: "Care assistant at 10:00",
-    tone: "bg-blue-50 text-blue-700 border-blue-100",
-  },
-];
-
 export function ElderHome() {
   const { t } = useLanguage();
+
+  const todayCards = [
+    {
+      icon: ShieldCheck,
+      label: t("elderCareStatus"),
+      value: t("elderCareStatusValue"),
+      detail: t("elderCareStatusDetail"),
+      tone: "bg-emerald-50 text-emerald-700 border-emerald-100",
+    },
+    {
+      icon: Pill,
+      label: t("elderMedication"),
+      value: t("elderMedicationValue"),
+      detail: t("elderMedicationDetail"),
+      tone: "bg-amber-50 text-amber-700 border-amber-100",
+    },
+    {
+      icon: CalendarCheck,
+      label: t("elderVisit"),
+      value: t("elderVisitValue"),
+      detail: t("elderVisitDetail"),
+      tone: "bg-blue-50 text-blue-700 border-blue-100",
+    },
+  ];
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -100,7 +100,7 @@ export function ElderHome() {
               onClick={handleLogout}
             >
               <LogOut className="size-4" />
-              Logout
+              {t("logout")}
             </Button>
           </div>
         </div>
@@ -111,7 +111,7 @@ export function ElderHome() {
           <div className="rounded-3xl border border-emerald-100 bg-white/92 p-6 shadow-xl shadow-emerald-900/5 sm:p-8 md:p-10">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
               <ShieldCheck className="size-4" />
-              Personal care companion
+              {t("personalCareCompanion")}
             </div>
             <h1 className="text-4xl font-semibold leading-tight text-slate-950 sm:text-5xl md:text-6xl">
               {t("welcomeBack")}
@@ -125,7 +125,7 @@ export function ElderHome() {
                 onClick={() => navigate("/health")}
               >
                 <Stethoscope className="size-5" />
-                Check wellness
+                {t("checkWellnessBtn")}
               </Button>
               <Button
                 variant="outline"
@@ -133,7 +133,7 @@ export function ElderHome() {
                 onClick={() => navigate("/messages")}
               >
                 <Phone className="size-5" />
-                Contact family
+                {t("contactFamily")}
               </Button>
             </div>
           </div>

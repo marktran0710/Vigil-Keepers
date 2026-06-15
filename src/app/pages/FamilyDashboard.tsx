@@ -17,46 +17,48 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useAuth } from "../context/AuthContext";
-
-const overviewCards = [
-  {
-    icon: ShieldCheck,
-    label: "Care status",
-    value: "Stable",
-    detail: "Last wellness check at 8:45 AM",
-    tone: "bg-emerald-50 text-emerald-700 border-emerald-100",
-  },
-  {
-    icon: Heart,
-    label: "Heart rate",
-    value: "72 bpm",
-    detail: "Within usual range",
-    tone: "bg-rose-50 text-rose-700 border-rose-100",
-  },
-  {
-    icon: CalendarCheck,
-    label: "Next visit",
-    value: "Tomorrow",
-    detail: "Care assistant at 10:00 AM",
-    tone: "bg-blue-50 text-blue-700 border-blue-100",
-  },
-];
-
-const updates = [
-  ["8:45 AM", "Wellness check completed", "Mood and appetite reported normal."],
-  ["12:30 PM", "Medication reminder", "Lunch medication reminder is scheduled."],
-  ["2:30 PM", "Family note", "Daughter confirmed weekend visit."],
-];
-
-const responsibilities = [
-  ["Medication refill", "Due Friday", "Assigned to Mei"],
-  ["Doctor appointment", "May 28, 10:30 AM", "Assigned to David"],
-  ["Grocery support", "Weekly", "Assigned to Anna"],
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export function FamilyDashboard() {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
+
+  const overviewCards = [
+    {
+      icon: ShieldCheck,
+      label: t("fCareStatus"),
+      value: t("fCareStatusValue"),
+      detail: t("fCareStatusDetail"),
+      tone: "bg-emerald-50 text-emerald-700 border-emerald-100",
+    },
+    {
+      icon: Heart,
+      label: t("fHeartRate"),
+      value: t("fHeartRateValue"),
+      detail: t("fHeartRateDetail"),
+      tone: "bg-rose-50 text-rose-700 border-rose-100",
+    },
+    {
+      icon: CalendarCheck,
+      label: t("fNextVisit"),
+      value: t("fNextVisitValue"),
+      detail: t("fNextVisitDetail"),
+      tone: "bg-blue-50 text-blue-700 border-blue-100",
+    },
+  ];
+
+  const updates = [
+    ["8:45 AM", t("update1Title"), t("update1Detail")],
+    ["12:30 PM", t("update2Title"), t("update2Detail")],
+    ["2:30 PM", t("update3Title"), t("update3Detail")],
+  ];
+
+  const responsibilities = [
+    [t("resp1Task"), t("resp1Due"), t("resp1Owner")],
+    [t("resp2Task"), t("resp2Due"), t("resp2Owner")],
+    [t("resp3Task"), t("resp3Due"), t("resp3Owner")],
+  ];
 
   const handleLogout = () => {
     logout();
@@ -73,10 +75,10 @@ export function FamilyDashboard() {
             </div>
             <div>
               <h1 className="text-xl font-semibold leading-tight">
-                Family dashboard
+                {t("familyDashboardTitle")}
               </h1>
               <p className="text-sm text-slate-500">
-                Shared care visibility for family members
+                {t("familyDashboardDesc")}
               </p>
             </div>
           </div>
@@ -85,13 +87,13 @@ export function FamilyDashboard() {
             <Link to="/">
               <Button variant="outline" size="sm" className="bg-white">
                 <Home className="size-4" />
-                Home
+                {t("home")}
               </Button>
             </Link>
             <LanguageSwitcher />
             <Button variant="outline" size="sm" className="bg-white" onClick={handleLogout}>
               <LogOut className="size-4" />
-              Logout
+              {t("logout")}
             </Button>
           </div>
         </div>
@@ -101,23 +103,22 @@ export function FamilyDashboard() {
         <section className="mb-6 grid gap-5 lg:grid-cols-[1fr_0.72fr]">
           <div className="rounded-3xl border border-blue-100 bg-white p-6 shadow-xl shadow-blue-900/5 sm:p-8">
             <Badge className="bg-blue-50 text-blue-700 hover:bg-blue-50">
-              Family mode
+              {t("familyModeBadge")}
             </Badge>
             <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
-              Keep everyone aligned around daily care.
+              {t("familyHeroTitle")}
             </h2>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-              Family members can review health updates, coordinate tasks,
-              message the elder, and see what the care team has already handled.
+              {t("familyHeroDesc")}
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button className="h-12 bg-blue-700 px-5 text-base hover:bg-blue-800">
                 <MessageCircle className="size-5" />
-                Message elder
+                {t("messageElder")}
               </Button>
               <Button variant="outline" className="h-12 bg-white px-5 text-base">
                 <Phone className="size-5" />
-                Call care team
+                {t("callCareTeam")}
               </Button>
             </div>
           </div>
@@ -126,19 +127,18 @@ export function FamilyDashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Bell className="size-5 text-amber-600" />
-                Priority notice
+                {t("priorityNotice")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-semibold text-slate-950">
-                Medication refill needed
+                {t("medicationRefillNeeded")}
               </p>
               <p className="mt-3 leading-7 text-slate-600">
-                The current prescription supply is estimated to run low this
-                Friday. Assign one family member to confirm refill pickup.
+                {t("medicationRefillDesc")}
               </p>
               <Button variant="outline" className="mt-5 bg-white">
-                Assign task
+                {t("assignTask")}
               </Button>
             </CardContent>
           </Card>
@@ -166,7 +166,7 @@ export function FamilyDashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Activity className="size-5 text-emerald-600" />
-                Today&apos;s care timeline
+                {t("todayCareTimeline")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -184,7 +184,7 @@ export function FamilyDashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CalendarCheck className="size-5 text-blue-600" />
-                Shared responsibilities
+                {t("sharedResponsibilities")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">

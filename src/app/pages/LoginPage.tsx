@@ -7,47 +7,7 @@ import { Card, CardContent } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { UserRole, useAuth } from "../context/AuthContext";
-
-const loginModes: Record<
-  UserRole,
-  {
-    title: string;
-    eyebrow: string;
-    description: string;
-    destination: string;
-    icon: typeof ShieldCheck;
-    accent: string;
-    button: string;
-  }
-> = {
-  admin: {
-    title: "Administrator login",
-    eyebrow: "Admin mode",
-    description: "For service operators managing elders, care teams, schedules, and requests.",
-    destination: "/admin",
-    icon: ShieldCheck,
-    accent: "bg-slate-100 text-slate-800 border-slate-200",
-    button: "Enter admin console",
-  },
-  elder: {
-    title: "Elder user login",
-    eyebrow: "Elder mode",
-    description: "For elders using wellness check-ins, reminders, messages, and family contact.",
-    destination: "/elder",
-    icon: HeartPulse,
-    accent: "bg-emerald-50 text-emerald-700 border-emerald-100",
-    button: "Enter elder view",
-  },
-  family: {
-    title: "Family login",
-    eyebrow: "Family mode",
-    description: "For family members reviewing updates, tasks, visits, and care communication.",
-    destination: "/family",
-    icon: Users,
-    accent: "bg-blue-50 text-blue-700 border-blue-100",
-    button: "Enter family dashboard",
-  },
-};
+import { useLanguage } from "../context/LanguageContext";
 
 function isUserRole(value: string | undefined): value is UserRole {
   return value === "admin" || value === "elder" || value === "family";
@@ -58,10 +18,44 @@ export function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, role: activeRole } = useAuth();
+  const { t } = useLanguage();
 
   if (!isUserRole(roleParam)) {
     return <Navigate to="/" replace />;
   }
+
+  const loginModes: Record<
+    UserRole,
+    { title: string; eyebrow: string; description: string; destination: string; icon: typeof ShieldCheck; accent: string; button: string }
+  > = {
+    admin: {
+      title: t("adminLoginTitle"),
+      eyebrow: t("adminEyebrow"),
+      description: t("adminLoginDesc"),
+      destination: "/admin",
+      icon: ShieldCheck,
+      accent: "bg-slate-100 text-slate-800 border-slate-200",
+      button: t("adminButton"),
+    },
+    elder: {
+      title: t("elderLoginTitle"),
+      eyebrow: t("elderEyebrow"),
+      description: t("elderLoginDesc"),
+      destination: "/elder",
+      icon: HeartPulse,
+      accent: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      button: t("elderButton"),
+    },
+    family: {
+      title: t("familyLoginTitle"),
+      eyebrow: t("familyEyebrow"),
+      description: t("familyLoginDesc"),
+      destination: "/family",
+      icon: Users,
+      accent: "bg-blue-50 text-blue-700 border-blue-100",
+      button: t("familyButton"),
+    },
+  };
 
   const mode = loginModes[roleParam];
   const Icon = mode.icon;
@@ -81,7 +75,7 @@ export function LoginPage() {
         <div className="grid w-full gap-8 lg:grid-cols-[0.92fr_1fr] lg:items-center">
           <div>
             <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950">
-              Back to workspace selection
+              {t("backToWorkspace")}
             </Link>
             <Badge className={`mt-8 border ${mode.accent}`}>
               {mode.eyebrow}
@@ -94,8 +88,7 @@ export function LoginPage() {
             </p>
             {activeRole && activeRole !== roleParam ? (
               <p className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-                You are currently signed into another mode. Continuing here will
-                switch this browser session to {mode.eyebrow.toLowerCase()}.
+                {t("switchModeWarning")} {mode.eyebrow.toLowerCase()}.
               </p>
             ) : null}
           </div>
@@ -108,7 +101,7 @@ export function LoginPage() {
 
               <form className="space-y-5" onSubmit={handleLogin}>
                 <div className="space-y-2">
-                  <Label htmlFor="user-id">User ID</Label>
+                  <Label htmlFor="user-id">{t("userId")}</Label>
                   <Input
                     id="user-id"
                     placeholder={`${roleParam}.demo`}
@@ -116,11 +109,11 @@ export function LoginPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t("password")}</Label>
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Prototype password"
+                    placeholder={t("passwordPlaceholder")}
                     autoComplete="current-password"
                   />
                 </div>
@@ -132,8 +125,7 @@ export function LoginPage() {
               </form>
 
               <p className="mt-5 text-sm leading-6 text-slate-500">
-                Prototype note: each login activates only this selected mode in
-                the browser session.
+                {t("prototypeNote")}
               </p>
             </CardContent>
           </Card>
