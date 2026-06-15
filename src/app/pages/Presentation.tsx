@@ -20,7 +20,7 @@ import { BrandLogo } from "../components/BrandLogo";
 import { useLanguage } from "../context/LanguageContext";
 
 const serviceImages = [
-  "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+  "https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
   "https://images.unsplash.com/photo-1615461066841-6116e61058f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
   "https://images.unsplash.com/photo-1609220136736-443140cffec6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
 ];
