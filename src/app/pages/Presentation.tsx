@@ -33,162 +33,162 @@ import { BrandLogo } from "../components/BrandLogo";
 
 const serviceCards = [
   {
-    icon: ShieldCheck,
-    title: "Final dignity planning",
-    copy: "Register religious preferences, funeral wishes, burial choices, and support needs before a crisis happens.",
+    icon: HeartPulse,
+    title: "居家安全監測",
+    copy: "整合式設備提供健康監測、行動偵測與緊急警報，讓家屬即時掌握長輩的居家安全狀況。",
     tone: "text-rose-600 bg-rose-50 border-rose-100",
   },
   {
-    icon: Database,
-    title: "Case tracking and reporting",
-    copy: "Connect registrations, case progress, government notifications, and care records in one traceable workflow.",
-    tone: "text-blue-600 bg-blue-50 border-blue-100",
+    icon: Coins,
+    title: "捐血點數兌換",
+    copy: "每次捐血累積點數，可折抵醫療照護設備租賃費用，讓善行直接轉化為自身或家人的長照保障。",
+    tone: "text-emerald-600 bg-emerald-50 border-emerald-100",
   },
   {
-    icon: Coins,
-    title: "Social contribution points",
-    copy: "Reward blood donation, organ donation intent, and volunteering with points for healthcare or funeral support.",
-    tone: "text-emerald-600 bg-emerald-50 border-emerald-100",
+    icon: Database,
+    title: "數位遺產保存",
+    copy: "為長輩錄製影像、聲音與回憶，自動播放家屬上傳的素材，留存珍貴的生命紀念。",
+    tone: "text-blue-600 bg-blue-50 border-blue-100",
   },
 ];
 
 const trustStats = [
-  ["1 plan", "for final wishes"],
-  ["4 sectors", "government, medical, legal, funeral"],
-  ["100%", "traceable case progress"],
-  ["1 place", "for memorial and records"],
+  ["桃竹苗", "捐血服務區域"],
+  ["3 大場景", "租賃、買斷、點數折抵"],
+  ["100%", "家屬同意才開放查看"],
+  ["1 台設備", "監測、娛樂、紀錄全整合"],
 ];
 
 const visualStories = [
   {
     icon: Building2,
-    eyebrow: "Service network",
-    title: "One coordinated path across public and care partners",
+    eyebrow: "合作夥伴網絡",
+    title: "串聯捐血中心、大學技術團隊與雲端平台",
     image:
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "Government, hospital, legal, funeral, and community partners work from the same case record.",
-    chips: ["Government", "Hospital", "Legal", "Funeral", "Community"],
-  },
-  {
-    icon: FileCheck2,
-    eyebrow: "Digital tools",
-    title: "Final wishes become a clear, traceable care record",
-    image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "Registration, LINE reminders, case progress, and digital memorials stay connected.",
-    chips: ["Register", "Notify", "Track", "Remember"],
-  },
-  {
-    icon: HandHeart,
-    eyebrow: "Human value",
-    title: "Less fear, more dignity, and fewer people left unseen",
-    image:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "The service supports people without reliable family care and families under financial pressure.",
-    chips: ["Dignity", "Belonging", "Support", "Relief"],
+    caption: "新竹捐血中心負責桃竹苗點數認證，中央大學研發硬軟體，Google/Amazon 提供雲端算力支援。",
+    chips: ["捐血中心", "中央大學", "Google", "Amazon", "電商"],
   },
   {
     icon: HeartPulse,
-    eyebrow: "Contribution points",
-    title: "Donation and volunteering become practical future support",
+    eyebrow: "居家監測設備",
+    title: "一台設備整合健康偵測、影像紀錄與媒體播放",
+    image:
+      "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    caption: "整合健康監測、行動偵測、放映、錄音、錄影等功能，讓長輩安心居家，家屬隨時掌握狀況。",
+    chips: ["健康監測", "行動偵測", "媒體播放", "錄影錄音"],
+  },
+  {
+    icon: HandHeart,
+    eyebrow: "捐血點數制度",
+    title: "捐血次數轉換點數，折抵長照設備租賃費用",
     image:
       "https://images.unsplash.com/photo-1615461066841-6116e61058f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "Blood donation, organ donation intent, and volunteering can translate into care or funeral support.",
-    chips: ["Donate", "Volunteer", "Earn", "Use"],
+    caption: "捐血者可將次數轉換為點數，用於折抵醫療設備費用；善心人士也可將點數捐贈給有需要的家庭。",
+    chips: ["捐血", "累積點數", "設備折扣", "善意捐贈"],
+  },
+  {
+    icon: Database,
+    eyebrow: "數位遺產",
+    title: "為家屬保存長輩的聲音、影像與生命故事",
+    image:
+      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    caption: "家屬可上傳素材讓設備自動播放，也可委託我們進行影片分類與後製，留存珍貴的數位遺產。",
+    chips: ["影像紀錄", "自動播放", "後製剪輯", "永久保存"],
   },
   {
     icon: Scale,
-    eyebrow: "Trust layer",
-    title: "Consent, pricing, and progress stay visible",
+    eyebrow: "隱私與透明",
+    title: "價格透明、隱私絕對隔離，未獲同意不查看",
     image:
       "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "Legal records, transparent quotes, partner verification, and audit trails protect every case.",
-    chips: ["Consent", "Pricing", "Audit", "Verification"],
+    caption: "提供標準定價避免資訊不對稱；所有監測內容在家屬同意前，平台方絕對不會查看。",
+    chips: ["價格透明", "隱私保護", "家屬同意", "離線雲端"],
   },
   {
     icon: Megaphone,
-    eyebrow: "Community access",
-    title: "Meet elders where planning conversations already happen",
+    eyebrow: "推廣通路",
+    title: "透過社群媒體、長照機構與電商觸及桃園市民",
     image:
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "Healthcare sites, markets, community centers, LINE, and social channels make the concept approachable.",
-    chips: ["LINE", "Clinics", "Markets", "Community"],
+    caption: "結合 FB、IG、LINE Bot，以及桃園在地捐血中心、醫療與長照機構，擴大服務觸及面。",
+    chips: ["LINE Bot", "社群媒體", "長照機構", "蝦皮/MOMO"],
   },
   {
     icon: Landmark,
-    eyebrow: "Sustainability",
-    title: "Shared payment paths keep service costs realistic",
+    eyebrow: "收益模式",
+    title: "設備租賃、數位遺產後製與娛樂廠商分潤",
     image:
       "https://images.unsplash.com/photo-1554224154-26032ffc0d07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "Personal contribution, public subsidy, partner discounts, and institutional payments can work together.",
-    chips: ["Subsidy", "Partner", "Family", "Public"],
+    caption: "三種主要收益來源：設備租賃或買斷、數位遺產客製化服務，以及娛樂內容廠商合作分潤。",
+    chips: ["設備租賃", "買斷方案", "數位遺產", "娛樂分潤"],
   },
 ];
 
 const journeySteps = [
   {
-    icon: FileCheck2,
-    label: "Plan",
-  },
-  {
-    icon: Database,
-    label: "Record",
-  },
-  {
-    icon: Building2,
-    label: "Coordinate",
+    icon: HandHeart,
+    label: "捐血",
   },
   {
     icon: Coins,
-    label: "Support",
+    label: "累積點數",
   },
   {
     icon: ShieldCheck,
-    label: "Remember",
+    label: "租用設備",
+  },
+  {
+    icon: HeartPulse,
+    label: "居家監護",
+  },
+  {
+    icon: Database,
+    label: "數位遺產",
   },
 ];
 
 const machineFlow = [
   {
     icon: Watch,
-    label: "Wearables",
-    detail: "Vitals, sleep, SOS",
+    label: "健康監測",
+    detail: "心率、血壓、跌倒偵測",
   },
   {
-    icon: Wifi,
-    label: "Home unit",
-    detail: "BLE, Wi-Fi, edge gateway",
+    icon: Camera,
+    label: "影像錄製",
+    detail: "1080P 攝影機、麥克風",
   },
   {
     icon: Cpu,
-    label: "AI analysis",
-    detail: "Fall and anomaly detection",
+    label: "邊緣運算",
+    detail: "本地 AI 分析，離線雲端",
   },
   {
     icon: Cloud,
-    label: "Cloud platform",
-    detail: "Secure data and rules",
+    label: "雲端平台",
+    detail: "Google/Amazon 安全儲存",
   },
   {
     icon: Bell,
-    label: "Family alerts",
-    detail: "LINE, SMS, app, call",
+    label: "家屬通知",
+    detail: "LINE Bot、SMS、App 推播",
   },
 ];
 
 const additionalValues = [
-  "Consent-first",
-  "Audit trails",
-  "Grief support",
-  "Natural burial",
-  "Verified partners",
-  "Accessible by LINE",
+  "價格透明化",
+  "隱私絕對隔離",
+  "易操作設備",
+  "LINE Bot 即時通知",
+  "離線雲端架構",
+  "增進家屬互動",
 ];
 
 const socialContacts = [
-  ["FB", "CareBridge Elder Support"],
-  ["IG", "@carebridge.support"],
-  ["LINE", "@carebridge"],
+  ["FB", "Vigil Keepers 守護者"],
+  ["IG", "@vigilkeepers.tw"],
+  ["LINE", "@vigilkeepers"],
 ];
 
 export function Presentation() {
@@ -225,20 +225,19 @@ export function Presentation() {
           <div className="max-w-3xl">
             <div className="mb-6 flex flex-wrap gap-2">
               <Badge className="border border-emerald-100 bg-emerald-50 text-emerald-700 hover:bg-emerald-50">
-                Social innovation for final dignity
+                捐血點數 × 長照設備 × 數位遺產
               </Badge>
               <Badge className="border border-blue-100 bg-blue-50 text-blue-700 hover:bg-blue-50">
-                Government, medical, legal, and funeral coordination
+                桃竹苗地區長照社會創新平台
               </Badge>
             </div>
 
             <h1 className="text-4xl font-semibold leading-[1.05] tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
-              A trusted platform for dignified end-of-life planning.
+              用捐血守護長輩，讓愛成為最好的長照保障。
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-              CareBridge helps people plan final wishes, coordinate public and
-              medical reporting, arrange funeral services, and create a digital
-              memorial so no one is left without dignity or remembrance.
+              Vigil Keepers 結合捐血點數制度與居家照護設備，讓您的善心捐血轉化為長照折扣，
+              同時為家中長輩提供安全監測、娛樂陪伴與數位遺產保存服務。
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -247,13 +246,13 @@ export function Presentation() {
                   size="lg"
                   className="h-12 bg-emerald-700 px-6 text-base hover:bg-emerald-800"
                 >
-                  Start planning
+                  長輩入口
                   <ArrowRight className="size-5" />
                 </Button>
               </Link>
               <Link to="/login/family">
                 <Button size="lg" variant="outline" className="h-12 bg-white px-6 text-base">
-                  View family coordination
+                  家屬管理介面
                 </Button>
               </Link>
             </div>
@@ -267,12 +266,12 @@ export function Presentation() {
             />
             <div className="mt-4 grid grid-cols-2 gap-3">
               <div className="rounded-2xl bg-emerald-50 p-4">
-                <div className="text-sm text-emerald-700">Today</div>
-                <div className="mt-1 text-2xl font-semibold">Registered</div>
+                <div className="text-sm text-emerald-700">本月捐血點數</div>
+                <div className="mt-1 text-2xl font-semibold">+250 點</div>
               </div>
               <div className="rounded-2xl bg-blue-50 p-4">
-                <div className="text-sm text-blue-700">Case status</div>
-                <div className="mt-1 text-2xl font-semibold">Tracked</div>
+                <div className="text-sm text-blue-700">長輩居家狀態</div>
+                <div className="mt-1 text-2xl font-semibold">安全</div>
               </div>
             </div>
           </div>
@@ -293,15 +292,14 @@ export function Presentation() {
           <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.88fr_1fr] lg:px-8">
             <div>
               <Badge className="bg-blue-50 text-blue-700 hover:bg-blue-50">
-                Elder machine system
+                一體式居家照護設備
               </Badge>
               <h2 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">
-                A home unit that watches quietly and alerts family when it matters.
+                一台設備靜靜守護，有事立即通知家屬。
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                The device combines a projector, camera, speaker, microphone,
-                local AI, encrypted storage, and cloud alerts so elders can stay
-                at home with stronger safety coverage.
+                整合投影、攝影機、麥克風、邊緣 AI 與加密儲存，讓長輩安心待在家中，
+                家屬隨時透過 LINE Bot 掌握最新狀況。
               </p>
 
               <div className="mt-8 rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
@@ -358,14 +356,14 @@ export function Presentation() {
               <div className="mb-5 flex items-center justify-between gap-3">
                 <div>
                   <h3 className="text-2xl font-semibold text-slate-950">
-                    Monitoring flow
+                    監護流程
                   </h3>
                   <p className="mt-1 text-sm text-slate-500">
-                    Wearable data, local AI, cloud records, and family alerts.
+                    本地 AI 分析、離線雲端儲存、即時家屬通知。
                   </p>
                 </div>
                 <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50">
-                  Secure path
+                  安全路徑
                 </Badge>
               </div>
 
@@ -389,7 +387,7 @@ export function Presentation() {
               </div>
 
               <div className="mt-6 grid gap-3 rounded-2xl border border-rose-100 bg-rose-50 p-4 sm:grid-cols-5">
-                {["Fall", "SOS", "No activity", "Heart anomaly", "Low battery"].map((alert) => (
+                {["跌倒偵測", "SOS 緊急", "無活動異常", "心率異常", "電量不足"].map((alert) => (
                   <div key={alert} className="rounded-xl bg-white px-3 py-2 text-center text-xs font-medium text-rose-700">
                     {alert}
                   </div>
@@ -403,12 +401,11 @@ export function Presentation() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-8 max-w-3xl">
               <h2 className="text-3xl font-semibold text-slate-950 sm:text-4xl">
-                What CareBridge provides
+                Vigil Keepers 提供什麼
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                The platform combines end-of-life preference registration,
-                public-sector case coordination, digital memorials, and a
-                contribution-points model connected to care and funeral support.
+                平台結合居家安全監測設備、捐血點數折扣制度與數位遺產保存服務，
+                讓桃園市民以善行換取長照保障，讓長輩獲得妥善照顧。
               </p>
             </div>
 
@@ -432,10 +429,10 @@ export function Presentation() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-8 max-w-3xl">
               <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50">
-                How it works
+                服務流程
               </Badge>
               <h2 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">
-                A visual path from planning to remembrance.
+                從捐血到守護長輩的完整路徑。
               </h2>
             </div>
 
@@ -464,10 +461,10 @@ export function Presentation() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-8 max-w-3xl">
               <Badge className="bg-blue-50 text-blue-700 hover:bg-blue-50">
-                Visual service map
+                商業模式全覽
               </Badge>
               <h2 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">
-                The model shown through people, places, and actions.
+                透過合作夥伴、服務設計與通路，實現長照社會創新。
               </h2>
             </div>
 
@@ -515,15 +512,14 @@ export function Presentation() {
           <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:px-8">
             <div>
               <Badge className="bg-white/10 text-white hover:bg-white/10">
-                Additional values to add
+                我們的核心承諾
               </Badge>
               <h2 className="mt-5 text-3xl font-semibold sm:text-4xl">
-                Trust is the product, not only a feature.
+                信任不是功能，而是我們的產品本身。
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-300">
-                Because this service handles death, family anxiety, public
-                systems, money, and memory, the website should emphasize consent,
-                legality, transparency, and emotional support.
+                因為這項服務涉及長輩的隱私、家屬的安全感與珍貴的生命紀念，
+                我們以透明、同意優先與隱私保護為核心設計原則。
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -542,36 +538,35 @@ export function Presentation() {
             <div>
               <BrandLogo />
               <p className="mt-5 max-w-md leading-7 text-slate-600">
-                A trusted coordination platform for end-of-life planning,
-                government reporting, funeral services, digital memorials, and
-                contribution-based care support.
+                桃竹苗長照社會創新平台，結合捐血點數制度、居家照護設備與數位遺產服務，
+                讓善行成為家人最好的長照保障。
               </p>
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                 <h2 className="text-lg font-semibold text-slate-950">
-                  Contact us
+                  聯絡我們
                 </h2>
                 <div className="mt-4 space-y-3 text-sm text-slate-600">
                   <div className="flex gap-3">
                     <Phone className="mt-0.5 size-5 shrink-0 text-emerald-700" />
-                    <span>+886 2 2345 6789</span>
+                    <span>+886 3 1234 5678</span>
                   </div>
                   <div className="flex gap-3">
                     <Mail className="mt-0.5 size-5 shrink-0 text-emerald-700" />
-                    <span>hello@carebridge.example</span>
+                    <span>hello@vigilkeepers.tw</span>
                   </div>
                   <div className="flex gap-3">
                     <MapPin className="mt-0.5 size-5 shrink-0 text-emerald-700" />
-                    <span>12F, No. 88 Renai Road, Taipei City, Taiwan</span>
+                    <span>桃園市中壢區中大路 300 號（近國立中央大學）</span>
                   </div>
                 </div>
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                 <h2 className="text-lg font-semibold text-slate-950">
-                  Social channels
+                  社群媒體
                 </h2>
                 <div className="mt-4 grid gap-3">
                   {socialContacts.map(([channel, label]) => (
