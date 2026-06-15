@@ -62,66 +62,66 @@ const trustStats = [
 const visualStories = [
   {
     icon: Building2,
-    eyebrow: "合作夥伴網絡",
-    title: "串聯捐血中心、大學技術團隊與雲端平台",
+    eyebrow: "關鍵合作夥伴",
+    title: "串聯捐血中心、中央大學與雲端平台",
     image:
-      "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "新竹捐血中心負責桃竹苗點數認證，中央大學研發硬軟體，Google/Amazon 提供雲端算力支援。",
-    chips: ["捐血中心", "中央大學", "Google", "Amazon", "電商"],
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    caption: "法律顧問、新竹捐血中心（桃竹苗）、中央大學機電資工系、Google/Amazon 雲端，以及蝦皮、MOMO、PChome 等電商通路共同支持。",
+    chips: ["新竹捐血中心", "中央大學", "Google/Amazon", "蝦皮/MOMO", "法律顧問"],
   },
   {
     icon: HeartPulse,
-    eyebrow: "居家監測設備",
-    title: "一台設備整合健康偵測、影像紀錄與媒體播放",
+    eyebrow: "一體式居家設備",
+    title: "整合健康偵測、放映、錄音錄影的智慧設備",
     image:
-      "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "整合健康監測、行動偵測、放映、錄音、錄影等功能，讓長輩安心居家，家屬隨時掌握狀況。",
-    chips: ["健康監測", "行動偵測", "媒體播放", "錄影錄音"],
+      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    caption: "由中央大學機電資工系研發，整合健康監測、行動偵測、媒體放映、錄音與錄影，兼容其他設備，讓長輩安心居家。",
+    chips: ["健康監測", "行動偵測", "媒體播放", "錄影錄音", "設備兼容"],
   },
   {
     icon: HandHeart,
     eyebrow: "捐血點數制度",
-    title: "捐血次數轉換點數，折抵長照設備租賃費用",
+    title: "捐血次數轉換點數，折抵長照設備費用",
     image:
       "https://images.unsplash.com/photo-1615461066841-6116e61058f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "捐血者可將次數轉換為點數，用於折抵醫療設備費用；善心人士也可將點數捐贈給有需要的家庭。",
-    chips: ["捐血", "累積點數", "設備折扣", "善意捐贈"],
+    caption: "與新竹捐血中心合作，捐血次數轉為點數，可折抵醫療設備租賃費；善心人士亦可將點數捐贈給有需要的家庭。",
+    chips: ["捐血動機", "點數累積", "設備折扣", "善意捐贈", "社區互助"],
   },
   {
     icon: Database,
     eyebrow: "數位遺產",
     title: "為家屬保存長輩的聲音、影像與生命故事",
     image:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "家屬可上傳素材讓設備自動播放，也可委託我們進行影片分類與後製，留存珍貴的數位遺產。",
-    chips: ["影像紀錄", "自動播放", "後製剪輯", "永久保存"],
+      "https://images.unsplash.com/photo-1609220136736-443140cffec6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    caption: "設備自動播放家屬上傳的照片與影片，減少長輩被遺忘的感受；家屬也可委託影片分類與後製，留存珍貴數位遺產。",
+    chips: ["影像紀錄", "自動播放", "後製剪輯", "Line Bot 上傳", "永久保存"],
   },
   {
     icon: Scale,
-    eyebrow: "隱私與透明",
-    title: "價格透明、隱私絕對隔離，未獲同意不查看",
+    eyebrow: "顧客關係",
+    title: "價格透明、高隱私性，易操作，增進家屬互動",
     image:
-      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "提供標準定價避免資訊不對稱；所有監測內容在家屬同意前，平台方絕對不會查看。",
-    chips: ["價格透明", "隱私保護", "家屬同意", "離線雲端"],
+      "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    caption: "標準定價避免資訊不對稱；未獲家屬同意，我方無權查看內容；設備操作簡易，適合長輩使用，家屬可隨時上傳互動素材。",
+    chips: ["價格透明", "高隱私性", "易操作", "家屬互動", "離線雲端"],
   },
   {
     icon: Megaphone,
     eyebrow: "推廣通路",
-    title: "透過社群媒體、長照機構與電商觸及桃園市民",
+    title: "社群媒體、長照機構、電商與實體安裝",
     image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "結合 FB、IG、LINE Bot，以及桃園在地捐血中心、醫療與長照機構，擴大服務觸及面。",
-    chips: ["LINE Bot", "社群媒體", "長照機構", "蝦皮/MOMO"],
+      "https://images.unsplash.com/photo-1556761175-4b46a572b786?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+    caption: "透過 FB、IG、Google 等社群媒體傳播；結合桃園捐血、醫療、長照機構；提供實體交付安裝；並於蝦皮、MOMO、PChome 上架銷售。",
+    chips: ["LINE Bot", "FB/IG", "長照機構", "電商平台", "實體安裝"],
   },
   {
     icon: Landmark,
     eyebrow: "收益模式",
-    title: "設備租賃、數位遺產後製與娛樂廠商分潤",
+    title: "設備收入、數位遺產後製與娛樂廠商分潤",
     image:
       "https://images.unsplash.com/photo-1554224154-26032ffc0d07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
-    caption: "三種主要收益來源：設備租賃或買斷、數位遺產客製化服務，以及娛樂內容廠商合作分潤。",
-    chips: ["設備租賃", "買斷方案", "數位遺產", "娛樂分潤"],
+    caption: "三大收益來源：設備租賃或買斷、數位遺產影片分類與後製等客製化服務，以及娛樂廠商合作分潤。",
+    chips: ["設備租賃", "買斷方案", "數位遺產後製", "娛樂分潤"],
   },
 ];
 
@@ -178,7 +178,7 @@ const machineFlow = [
 
 const additionalValues = [
   "價格透明化",
-  "隱私絕對隔離",
+  "高隱私性",
   "易操作設備",
   "LINE Bot 即時通知",
   "離線雲端架構",
@@ -202,17 +202,17 @@ export function Presentation() {
           <div className="flex items-center gap-2 sm:gap-3">
             <Link to="/login/elder">
               <Button variant="outline" size="sm" className="bg-white">
-                Elder View
+                長輩介面
               </Button>
             </Link>
             <Link to="/login/admin" className="hidden md:block">
               <Button variant="outline" size="sm" className="bg-white">
-                Admin
+                管理員
               </Button>
             </Link>
             <Link to="/login/family" className="hidden sm:block">
               <Button variant="outline" size="sm" className="bg-white">
-                Family View
+                家屬介面
               </Button>
             </Link>
             <LanguageSwitcher />
@@ -260,8 +260,8 @@ export function Presentation() {
 
           <div className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-emerald-900/10">
             <img
-              src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
-              alt="Caregiver helping an elder at home"
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
+              alt="Elder person at home with family"
               className="aspect-[4/3] w-full rounded-3xl object-cover"
             />
             <div className="mt-4 grid grid-cols-2 gap-3">
@@ -338,15 +338,15 @@ export function Presentation() {
                 <div className="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
                   <div className="rounded-2xl bg-white p-3 text-slate-600">
                     <Camera className="mx-auto mb-2 size-5 text-blue-700" />
-                    Vision
+                    攝影鏡頭
                   </div>
                   <div className="rounded-2xl bg-white p-3 text-slate-600">
                     <Cpu className="mx-auto mb-2 size-5 text-emerald-700" />
-                    Edge AI
+                    邊緣 AI
                   </div>
                   <div className="rounded-2xl bg-white p-3 text-slate-600">
                     <Bell className="mx-auto mb-2 size-5 text-rose-700" />
-                    Alerts
+                    即時通知
                   </div>
                 </div>
               </div>
