@@ -147,7 +147,7 @@ export function Presentation() {
                   <img
                     src={s.img}
                     alt={s.title}
-                    className="aspect-[16/9] w-full object-cover"
+                    className="aspect-[16/9] w-full object-contain bg-slate-50"
                   />
                   <div className="p-5">
                     <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
